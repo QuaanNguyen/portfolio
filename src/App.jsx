@@ -1,5 +1,5 @@
 import "./App.css";
-import ToggleDarkMode from "./components/ToggleDarkMode";
+import NavBar from "./components/NavBar";
 import WelcomePrompt from "./components/WelcomePrompt";
 import Copyright from "./components/Copyright";
 import RadialBackground from "./components/RadialBackground";
@@ -18,7 +18,7 @@ function App() {
     <>
       <div className="relative w-screen h-screen overflow-hidden bg-gray-100 dark:bg-neutral-900 transition-colors">
         <RadialBackground />
-        <ToggleDarkMode />
+        <NavBar />
         <BellRing onClick={tableText} />
         <WelcomePrompt
           welcomeText={welcomeText}
