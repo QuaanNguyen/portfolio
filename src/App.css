@@ -1,9 +1,11 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --animate-pulse: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-pulseSlow: pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --font-hedvig: 'Hedvig Letters Sans', sans-serif;
 
   @keyframes pulse {
     50% {

@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 export default function useChangeText() {
-  const [welcomeText, setWelcomeText] = useState("Welcome to Quan's Tavern");
+  const [welcomeText, setWelcomeText] = useState("Welcome to Quan's Bistro");
   const [showButton, setShowButton] = useState(false);
 
   const tableText = useCallback(() => {

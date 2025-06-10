@@ -26,7 +26,7 @@ function App() {
           nextView={nextView}
         />
         <Copyright />
-      </div>
+      </div>Í
     </>
   );
 }

@@ -1,7 +1,7 @@
 export default function WelcomePrompt({ welcomeText, showButton, nextView }) {
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center transition-colors select-none z-30">
-      <p className="text-7xl text-gray-900 dark:text-gray-300 mb-16 mt-[-10%]">
+      <p className="font-hedvig text-7xl text-black dark:text-white font-medium mb-16 mt-[-10%]">
         {welcomeText}
       </p>
       <div className="h-12">
