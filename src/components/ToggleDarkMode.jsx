@@ -1,21 +1,21 @@
-import useDarkMode from '../hooks/useDarkMode';
-import {MoonIcon, SunIcon} from '@heroicons/react/24/solid';
+import useDarkMode from "../hooks/useDarkMode";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 export default function ToggleDarkMode() {
-    const { toggleDarkMode, isDarkMode } = useDarkMode();
+  const { toggleDarkMode, isDarkMode } = useDarkMode();
 
-    return (
-        <div className='absolute top-7 left-7 z-50'>
-            <button
-            onClick={toggleDarkMode}
-            className="w-10 h-10 flex items-center justify-center rounded-full text-gray-800 dark:text-white transition-colors duration-50 cursor-pointer"
-        >
-            {isDarkMode ? (
-                <SunIcon className="w-10 h-10 hover:scale-110 active:scale-90 duration-300" />
-            ) : (
-                <MoonIcon className="w-10 h-10 hover:scale-110 active:scale-90 duration-300" />
-            )}
-        </button>
-        </div>
-    )
+  return (
+    <div className="absolute top-7 left-7 z-50">
+      <button
+        onClick={toggleDarkMode}
+        className="w-10 h-10 flex items-center justify-center rounded-full text-gray-800 dark:text-white transition-colors duration-50 cursor-pointer"
+      >
+        {isDarkMode ? (
+          <SunIcon className="w-10 h-10 hover:scale-110 active:scale-90 duration-300" />
+        ) : (
+          <MoonIcon className="w-10 h-10 hover:scale-110 active:scale-90 duration-300" />
+        )}
+      </button>
+    </div>
+  );
 }
