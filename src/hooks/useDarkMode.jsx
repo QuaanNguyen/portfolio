@@ -6,7 +6,7 @@ export default function useDarkMode() {
         if (savedTheme) {
             return savedTheme === 'dark';
         }
-        return true; // Default to dark mode
+        return false; // Default to dark mode
     });
 
     // Toggle dark mode

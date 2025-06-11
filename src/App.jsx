@@ -1,19 +1,10 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
-import WelcomePrompt from "./components/WelcomePrompt";
-import Copyright from "./components/Copyright";
 import RadialBackground from "./components/RadialBackground";
-import useChangeText from "./hooks/useChangeText";
-
+import Copyright from "./components/Copyright";
+import MainView from "./components/MainView";
 
 function App() {
-  const { welcomeText } = useChangeText();
-
-  const nextView = () => {
-    // Logic to change view or navigate to another component
-    console.log("Next view triggered");
-  };
-
   return (
     <>
       <div className="relative w-screen h-screen overflow-hidden bg-gray-100 dark:bg-neutral-900 transition-colors">
@@ -42,10 +33,7 @@ function App() {
           to="to-teal-200"
         />
         <NavBar />
-        <WelcomePrompt
-          welcomeText={welcomeText}
-          nextView={nextView}
-        />
+        <MainView />
         <Copyright />
       </div>
       Í

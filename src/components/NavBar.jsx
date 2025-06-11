@@ -19,6 +19,8 @@ export default function NavBar() {
         </button>
       </div>
 
+      <div className="absolute left-1/2 transform -translate-x-1/2 text-5xl">quan nguyen</div>
+
       <div className="absolute top-7 right-7 grid grid-flow-col gap-5 text-gray-800 dark:text-white transition-colors duration-50">
         <a
           href="https://www.linkedin.com/in/quan-nguyen-127650221/"
