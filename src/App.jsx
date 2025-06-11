@@ -3,11 +3,11 @@ import NavBar from "./components/NavBar";
 import WelcomePrompt from "./components/WelcomePrompt";
 import Copyright from "./components/Copyright";
 import RadialBackground from "./components/RadialBackground";
-import BellRing from "./components/BellRing";
 import useChangeText from "./hooks/useChangeText";
 
+
 function App() {
-  const { welcomeText, tableText, showButton } = useChangeText();
+  const { welcomeText } = useChangeText();
 
   const nextView = () => {
     // Logic to change view or navigate to another component
@@ -42,10 +42,8 @@ function App() {
           to="to-teal-200"
         />
         <NavBar />
-        <BellRing onClick={tableText} />
         <WelcomePrompt
           welcomeText={welcomeText}
-          showButton={showButton}
           nextView={nextView}
         />
         <Copyright />
