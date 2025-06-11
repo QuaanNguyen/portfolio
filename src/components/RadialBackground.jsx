@@ -1,8 +1,23 @@
-export default function RadialBackground() {
+export default function RadialBackground({
+  left = "left-0",
+  top = "top-0",
+  size = "size-100",
+  from = "from-red-500",
+  via = "via-yellow-500",
+  to = "to-green-500",
+}) {
   return (
-    <div className="z-0">
-      <div className="absolute left-1/15 size-200 rounded-full bg-radial from-orange-600 to-gray-100 to-70% dark:to-neutral-900 transition-colors pointer-events-none animate-pulseSlow"></div>
-      <div className="absolute bottom-1/15 right-1/10 size-130 rounded-full bg-radial from-yellow-600 to-gray-100 to-65% dark:to-neutral-900 transition-colors pointer-events-none animate-pulse"></div>
-    </div>
+    <div
+      className={`
+        absolute
+        ${left} ${top}
+        ${size}
+        bg-radial rounded-full ${from} ${via} ${to}
+        blur-lg
+        opacity-70
+        animate-hue-rotate
+        pointer-events-none
+      `}
+    />
   );
 }
