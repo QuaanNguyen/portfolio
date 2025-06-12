@@ -13,11 +13,10 @@ A clean, responsive portfolio website with designed inspired by [Apple](https://
 
 ## 🛠️ Built With
 
-- **Framework:** React 19
-- **Language:** JavaScript (ES6+)
-- **Styling:** Tailwind CSS 4.1
+- **Framework:** [React 19](https://react.dev/blog/2024/12/05/react-19)
+- **Language:** [JavaScript (ES6+)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- **Styling:** [TailwindCSS 4.1](https://tailwindcss.com/docs/installation/using-vite)
 - **Hosting:** Vercel / GitHub Pages
-- **Deployment & Version Control:** Git + GitHub
 
 ---
 
@@ -26,7 +25,7 @@ A clean, responsive portfolio website with designed inspired by [Apple](https://
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/your-portfolio.git
+git clone https://github.com/quan-ng03/portfolio.git
 ```
 ### Install dependencies
 
@@ -43,6 +42,8 @@ Open your browser and visit: http://localhost:5173
 ## 📄 License
 
 This project is licensed under the MIT License – see the LICENSE file for details.
+
+---
 
 ## ⭐️ Give it a Star
 
