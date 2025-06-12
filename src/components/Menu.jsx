@@ -3,7 +3,7 @@ import ProfilePic from "../assets/picture.JPEG";
 export default function Menu() {
   const sectionStyle =
     "overflow-hidden w-full h-full flex items-center justify-center p-6 rounded-xl shadow-lg";
-
+    const experienceStyle = "p-2 rounded-xl border border-transparent hover:shadow-lg hover:border-gray-300 dark:shadow-gray-500 transition-shadow duration-100";
   return (
     <div className="absolute top-[90px] left-0 w-full h-[calc(100vh-150px)] flex justify-center">
       <div className="grid grid-flow-col grid-cols-3 grid-rows-3 gap-5 text-black dark:text-white transition-colors duration-0 w-full px-8">
@@ -12,13 +12,20 @@ export default function Menu() {
           <div className="max-w-8/9 leading-relaxed">
             <h2 className="text-2xl font-bold mb-4 text-left">about me</h2>
             <p className="mb-4">
-              I am currently a <a className="font-semibold">full stack engineer</a>, looking for new grad opportunities in the US.
+              I am currently a{" "}
+              <a className="font-semibold">full stack engineer</a>, looking for
+              new grad opportunities in the US.
+              <br />
+              <br />I have done two internships, both about building solutions
+              for stakeholders, focused on{" "}
+              <a className="font-semibold">optimizing system</a>. My mission is
+              to build products that make people's lives easier and more
+              enjoyable.
               <br />
               <br />
-              I have done two internships, both about building solutions for stakeholders, focused on <a className="font-semibold">optimizing system</a>. My mission is to build products that make people's lives easier and more enjoyable.
-              <br />
-              <br />
-              In order to achieve that, I take great care in understanding the needs of users, and pay attention to <a className="font-semibold">system design and architecture</a>.
+              In order to achieve that, I take great care in understanding the
+              needs of users, and pay attention to{" "}
+              <a className="font-semibold">system design and architecture</a>.
             </p>
 
             <h2 className="text-2xl font-bold mt-4 mb-4 text-left">
@@ -63,10 +70,52 @@ export default function Menu() {
         </div>
 
         {/* Work Experience */}
-        <div className={`bg-orange-500 row-span-2 col-start-3 ${sectionStyle}`}>
-          <span className="text-xl font-semibold text-center">
-            Work Experience
-          </span>
+        <div className={`row-span-2 col-start-3 ${sectionStyle}`}>
+          <div className="max-w-9/10 leading-relaxed">
+            <h2 className="text-2xl font-bold mb-4 text-left">experiences</h2>
+
+            <div className={experienceStyle}>
+              <p className="font-semibold">Software Engineer Intern</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                Maricopa County Attorney Office · Aug 2024 – May 2025
+              </p>
+            </div>
+
+            <div className={experienceStyle}>
+              <p className="font-semibold">Software Engineer Intern</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                Crown Castle · Jun 2024 – Aug 2024
+              </p>
+            </div>
+
+            <div className={experienceStyle}>
+              <p className="font-semibold">
+                Cloud Developer / Teaching Assistant
+              </p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                ASU Cloud Innovation Center · Sep 2023 – May 2025
+              </p>
+            </div>
+
+            <div className={experienceStyle}>
+              <p className="font-semibold">Undergraduate Research Assistant</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                Fulton Undergraduate Research Initiative · Mar 2023 – Jul 2023
+              </p>
+            </div>
+            <div className={experienceStyle}>
+              <p className="font-semibold">Program Coordinator</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                Global Launch · August 2022 – May 2023
+              </p>
+            </div>
+            <div className={experienceStyle}>
+              <p className="font-semibold">Embedded Developer</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                EPICS · August 2022 – December 2022
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Tech Stack */}
