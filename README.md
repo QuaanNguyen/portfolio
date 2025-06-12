@@ -1,8 +1,8 @@
-# Quan Nguyen's Portfolio 🚀
+# Quan Nguyen's Portfolio 🍏 🧑‍💻
 
 📌 [LinkedIn](https://www.linkedin.com/in/quan-nguyen-127650221/) • 🌐 Status: Live
 
-A clean, responsive portfolio website built to showcase my mission-driven work and passion for innovation, blending elegant design with thoughtful functionality.
+A clean, responsive portfolio website with designed inspired by [Apple](https://www.apple.com/os/macos/)'s lastest macOS 26.
 
 ---
 
@@ -27,17 +27,17 @@ A clean, responsive portfolio website built to showcase my mission-driven work a
 
 ```bash
 git clone https://github.com/your-username/your-portfolio.git
-
+```
 ### Install dependencies
 
 ```bash
 npm install
-
+```
 ### Run development server locally
 
 ```bash
 npm run dev
-
+```
 Open your browser and visit: http://localhost:5173
 
 ## 📄 License
