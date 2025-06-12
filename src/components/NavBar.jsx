@@ -5,11 +5,11 @@ export default function NavBar() {
   const { toggleDarkMode, isDarkMode } = useDarkMode();
 
   return (
-    <div className="w-screen relative z-50">
+    <div className="w-screen relative text-gray-800 dark:text-white transition-colors duration-50 z-50">
       <div className="absolute top-7 left-7">
         <button
           onClick={toggleDarkMode}
-          className="size-10 flex items-center justify-center rounded-full text-gray-800 dark:text-white transition-colors duration-50 cursor-pointer"
+          className="size-10 flex items-center justify-center rounded-full  cursor-pointer"
         >
           {isDarkMode ? (
             <SunIcon className="size-10 hover:scale-110 active:scale-90 duration-300" />
@@ -19,9 +19,11 @@ export default function NavBar() {
         </button>
       </div>
 
-      <div className="absolute left-1/2 transform -translate-x-1/2 text-5xl">quan nguyen</div>
+      <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-5xl underline underline-offset-2 select-none cursor-default">
+        quan nguyen
+      </div>
 
-      <div className="absolute top-7 right-7 grid grid-flow-col gap-5 text-gray-800 dark:text-white transition-colors duration-50">
+      <div className="absolute top-7 right-7 grid grid-flow-col gap-5">
         <a
           href="https://www.linkedin.com/in/quan-nguyen-127650221/"
           target="_blank"
