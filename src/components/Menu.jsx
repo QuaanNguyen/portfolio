@@ -1,5 +1,6 @@
 import ProfilePic from "../assets/picture.JPEG";
 import SQLIcon from "../assets/sql.svg";
+import Maintenance from "./Maintenance";
 
 export default function Menu() {
   const sectionStyle =
@@ -67,8 +68,10 @@ export default function Menu() {
         </div>
 
         {/* Projects */}
-        <div className={`bg-blue-500 col-span-2 row-start-3 ${sectionStyle}`}>
-          <span className="text-xl font-semibold">Projects</span>
+        <div className={`col-span-2 row-start-3 ${sectionStyle}`}>
+          <div className="snap-x">
+            <Maintenance />
+          </div>
         </div>
 
         {/* Work Experience */}
