@@ -1,6 +1,6 @@
 # Quan Nguyen's Portfolio 🍏 🧑‍💻
 
-📌 [LinkedIn](https://www.linkedin.com/in/quan-nguyen-127650221/) • 🌐 Status: Live
+📌 [LinkedIn](https://www.linkedin.com/in/quan-nguyen-127650221/) • 🌐 Status: [Live](https://www.quannguyen.dev)
 
 A clean, responsive portfolio website with designed inspired by [Apple](https://www.apple.com/os/macos/)'s lastest macOS 26.
 
