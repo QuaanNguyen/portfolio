@@ -10,23 +10,25 @@ export default function Menu() {
     "p-2 rounded-xl border border-transparent hover:shadow-lg hover:border-gray-300 dark:shadow-gray-500 transition-shadow duration-100";
   return (
     <>
-      <a href={Resume} download="QuanResume"><button className="py-3 px-4 top-5.5 absolute flex gap-4 right-1/11 text-black dark:text-white dark:shadow-gray-500 hover:scale-110 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="size-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
-          />
-        </svg>
-        <p className="duration-0 font-bold">Resume</p>
-      </button></a>
+      <a href={Resume} download="QuanResume" className="hidden md:block">
+        <button className="py-3 px-4 top-5.5 absolute flex gap-4 right-1/11 text-black dark:text-white dark:shadow-gray-500 hover:scale-110 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+            />
+          </svg>
+          <p className="duration-0 font-bold">Resume</p>
+        </button>
+      </a>
       <div className="absolute top-[90px] left-0 w-full h-[calc(100vh-150px)] flex justify-center">
         <div className="grid grid-flow-col grid-cols-3 grid-rows-3 gap-5 text-black dark:text-white transition-colors duration-0 w-full px-8">
           {/* About Me Section */}
