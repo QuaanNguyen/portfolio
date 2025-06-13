@@ -7,7 +7,7 @@ import MainView from "./components/MainView";
 function App() {
   return (
     <>
-      <div className="relative w-screen h-screen overflow-hidden bg-gray-100 dark:bg-neutral-900 transition-colors">
+      <div className="relative w-screen min-h-screen overflow-x-hidden lg:overflow-hidden bg-gray-100 dark:bg-neutral-900 transition-colors">
         <RadialBackground
           left="-left-1/4"
           md_left="md:left-1"
@@ -50,9 +50,10 @@ function App() {
         />
         <NavBar />
         <MainView />
-        <Copyright />
+        <div className="hidden lg:block">
+          <Copyright />
+        </div>
       </div>
-      Í
     </>
   );
 }
