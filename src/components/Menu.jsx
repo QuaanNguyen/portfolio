@@ -2,16 +2,17 @@ import ProfilePic from "../assets/picture.JPEG";
 import SQLIcon from "../assets/sql.svg";
 import Resume from "../assets/resume.pdf";
 import Maintenance from "./Maintenance";
+import Copyright from "./Copyright";
 
 export default function Menu() {
   const sectionStyle =
-    "overflow-hidden w-full h-full flex items-center justify-center p-6 rounded-xl shadow-lg";
+    "lg:overflow-hidden flex items-center justify-center p-2 lg:p-6 rounded-xl shadow-lg";
   const experienceStyle =
     "p-2 rounded-xl border border-transparent hover:shadow-lg hover:border-gray-300 dark:shadow-gray-500 transition-shadow duration-100";
   return (
     <>
       <a href={Resume} download="QuanResume" className="hidden md:block">
-        <button className="py-3 px-4 top-5.5 absolute flex gap-4 right-1/11 text-black dark:text-white dark:shadow-gray-500 hover:scale-110 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer">
+        <button className="py-3 px-4 top-5.5 absolute flex gap-4 md:right-1/8 xl:right-1/11 text-black dark:text-white dark:shadow-gray-500 hover:scale-110 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -29,11 +30,13 @@ export default function Menu() {
           <p className="duration-0 font-bold">Resume</p>
         </button>
       </a>
-      <div className="absolute top-[90px] left-0 w-full h-[calc(100vh-150px)] flex justify-center">
-        <div className="grid grid-flow-col grid-cols-3 grid-rows-3 gap-5 text-black dark:text-white transition-colors duration-0 w-full px-8">
+      <div className="absolute top-[60px] lg:top-[90px] left-0 w-full lg:h-[calc(100vh-150px)] lg:pb-4 flex justify-center overflow-x-hidden overflow-y-auto lg:overflow-hidden">
+        <div className="flex flex-col gap-3 lg:grid lg:grid-cols-3 lg:grid-rows-3 lg:grid-flow-col lg:gap-5 text-black dark:text-white transition-colors duration-0 w-full px-5 lg:px-8">
           {/* About Me Section */}
-          <div className={`row-span-2 row-start-1 ${sectionStyle}`}>
-            <div className="max-w-8/9 leading-relaxed">
+          <div
+            className={`lg:row-span-2 lg:row-start-1 ${sectionStyle} order-2 `}
+          >
+            <div className="max-w-8/9 leading-relaxed ">
               <h2 className="text-2xl font-bold mb-4 text-left">about me</h2>
               <p className="mb-4">
                 I am currently a{" "}
@@ -75,12 +78,12 @@ export default function Menu() {
 
           {/* Profile Section */}
           <div
-            className={`row-span-2 col-start-2 ${sectionStyle} flex-col justify-evenly`}
+            className={`order-1 flex-auto p-4 lg:row-span-2 lg:col-start-2 ${sectionStyle} flex-col justify-center items-center gap-4 lg:justify-evenly `}
           >
             <img
               src={ProfilePic}
               alt="Profile"
-              className="w-85 h-85 object-cover rounded-2xl shadow-lg mb-3"
+              className="size-50 lg:size-85  object-cover rounded-2xl shadow-lg mb-3"
             />
             <div className="text-center text-4xl font-bold">Quan Nguyen</div>
             <div className="text-center text-lg text-gray-700 dark:text-gray-300">
@@ -89,14 +92,18 @@ export default function Menu() {
           </div>
 
           {/* Projects */}
-          <div className={`col-span-2 row-start-3 ${sectionStyle}`}>
+          <div
+            className={`order-4 lg:col-span-2 lg:row-start-3 ${sectionStyle}`}
+          >
             <div className="snap-x">
               <Maintenance />
             </div>
           </div>
 
           {/* Work Experience */}
-          <div className={`row-span-2 col-start-3 ${sectionStyle}`}>
+          <div
+            className={`order-3 lg:row-span-2 lg:col-start-3 ${sectionStyle}`}
+          >
             <div className="max-w-9/10 leading-relaxed">
               <h2 className="text-2xl font-bold mb-4 text-left">experiences</h2>
 
@@ -147,7 +154,9 @@ export default function Menu() {
           </div>
 
           {/* Tech Stack */}
-          <div className={`row-start-3 col-start-3 ${sectionStyle}`}>
+          <div
+            className={`order-5 lg:row-start-3 lg:col-start-3 ${sectionStyle}`}
+          >
             <div className="w-full grid grid-flow-row grid-cols-4 justify-items-center gap-4">
               <svg className="size-18" viewBox="0 0 48 48">
                 <path fill="#ffd600" d="M6,42V6h36v36H6z"></path>
@@ -334,6 +343,9 @@ export default function Menu() {
               </svg>
               <img src={SQLIcon} className="size-17" />
             </div>
+          </div>
+          <div className="order-last lg:hidden mt-10">
+            <Copyright />
           </div>
         </div>
       </div>

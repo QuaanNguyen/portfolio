@@ -18,17 +18,17 @@ export default function NavBar() {
       <div className="absolute top-5 md:top-7 left-5 md:left-7">
         <button
           onClick={toggleDarkMode}
-          className="size-10 flex items-center justify-center rounded-full cursor-pointer"
+          className="size-8 lg:size-10 flex items-center justify-center rounded-full cursor-pointer"
         >
           {isDarkMode ? (
-            <SunIcon className="size-10 hover:scale-110 active:scale-90 duration-300" />
+            <SunIcon className="hover:scale-110 active:scale-90 duration-300" />
           ) : (
-            <MoonIcon className="size-10 hover:scale-110 active:scale-90 duration-300" />
+            <MoonIcon className="hover:scale-110 active:scale-90 duration-300" />
           )}
         </button>
       </div>
 
-      {/* Name/Title */}
+      {/* Name */}
       <div className="absolute top-3 md:top-5 left-1/2 transform -translate-x-1/2 text-nowrap text-4xl md:text-5xl underline underline-offset-2 select-none cursor-default">
         quan nguyen
       </div>
@@ -42,7 +42,7 @@ export default function NavBar() {
       <div className="absolute top-5 right-5 md:hidden">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="size-10 flex items-center justify-center rounded-full cursor-pointer"
+          className="size-8 flex items-center justify-center rounded-full cursor-pointer"
         >
           {menuOpen ? (
             <XMarkIcon className="size-10" />
@@ -104,7 +104,7 @@ function SocialIcons({ isDropdown }) {
         {isDropdown && <span>GitHub</span>}
       </a>
       <a href={Resume} download="QuanResume" className="md:hidden mt-0.5">
-        <button className="py-3 px-4 top-5.5 flex gap-4 right-1/11 text-black dark:text-white dark:shadow-gray-500 hover:scale-110 active:scale-90 duration-300 rounded-xl shadow-lg inset-ring-2 cursor-pointer">
+        <button className="py-3 px-4 top-5.5 flex gap-4 right-1/11 text-black dark:text-white dark:shadow-gray-500 hover:scale-105 active:scale-90 duration-300 rounded-xl shadow-lg inset-ring-2 cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
