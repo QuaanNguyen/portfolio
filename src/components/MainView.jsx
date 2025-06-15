@@ -1,6 +1,7 @@
 import ProfilePic from "../assets/picture.JPEG";
 import SQLIcon from "../assets/sql.svg";
 import Resume from "../assets/resume.pdf";
+import Comment from "./Comment";
 import Maintenance from "./Maintenance";
 import Copyright from "./Copyright";
 
@@ -93,11 +94,18 @@ export default function MainView() {
 
           {/* Projects */}
           <div
-            className={`order-4 lg:col-span-2 lg:row-start-3 ${sectionStyle}`}
+            className={`order-4 lg:col-span-1 lg:row-start-3 lg:col-start-1 ${sectionStyle}`}
           >
             <div className="snap-x">
               <Maintenance />
             </div>
+          </div>
+
+          {/* Comments */}
+          <div
+            className={`lg:col-span-1 lg:row-start-3 lg:col-start-2 ${sectionStyle}`}
+          >
+            <Comment />
           </div>
 
           {/* Work Experience */}

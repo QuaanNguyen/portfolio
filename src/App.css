@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+@source inline("bg-{slate,gray,zinc,neutral,stone,red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose}-{100,200,300,400}");
 
 html,
 body,
