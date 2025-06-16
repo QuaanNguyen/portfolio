@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @source inline("bg-{slate,gray,zinc,neutral,stone,red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose}-{100,200,300,400}");
+@source inline("top-{0..100} left-{0..100} rotate-[{-45..45}deg] -rotate-[{0..45}deg]");
 
 html,
 body,
@@ -12,7 +13,7 @@ body,
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --animate-hue-rotate: hueRotate 10s cubic-bezier(0.4,0,0.6,1) infinite;
+  --animate-hue-rotate: hueRotate 10s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --font-hedvig: "Hedvig Letters Sans", sans-serif;
 
   @keyframes hueRotate {

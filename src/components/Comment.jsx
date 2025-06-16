@@ -32,10 +32,18 @@ function getRandomBg() {
   const v = vals[Math.floor(Math.random() * vals.length)];
   return `bg-${c}-${v}`;
 }
-const randomPos = () => ({
-  top: `${Math.random() * 80}%`,
-  left: `${Math.random() * 80}%`,
-});
+
+const randomLocation = () => {
+  const top = Math.floor(Math.random() * 40); // 0-79
+  const left = Math.floor(Math.random() * 100);
+  return [`top-${top}`, `left-${left}`];
+};
+
+const randomRotation = () => {
+  const angle = Math.floor(Math.random() * 45); // 0–45
+  const sign = Math.random() < 0.5 ? "" : "-";
+  return `${sign}rotate-[${angle}deg]`;
+};
 // --------------------------------
 
 export default function CommentSection() {
@@ -56,8 +64,9 @@ export default function CommentSection() {
         setNotes(
           data.map((row) => ({
             ...row,
-            style: randomPos(),
+            location: randomLocation(),
             color: getRandomBg(),
+            rotation: randomRotation(),
           }))
         );
       }
@@ -78,7 +87,12 @@ export default function CommentSection() {
     if (!error && data) {
       setNotes((prev) => [
         ...prev,
-        { ...data, style: randomPos(), color: getRandomBg() },
+        {
+          ...data,
+          location: randomLocation(),
+          color: getRandomBg(),
+          rotation: randomRotation(),
+        },
       ]);
       setInput("");
       setMode("display"); // remove blur + overlay
@@ -87,6 +101,8 @@ export default function CommentSection() {
     }
     setBusy(false);
   };
+
+  const openCompose = () => setMode("compose");
 
   // ------------- UI -------------
   const Overlay = () => (
@@ -142,8 +158,14 @@ export default function CommentSection() {
       {notes.map((n) => (
         <div
           key={n.id}
-          className={`${n.color} shadow-md rounded px-3 py-2 absolute whitespace-pre-wrap hover:scale-110 active:scale-90 duration-300 select-none`}
-          style={n.style}
+          className={[
+            n.location[0],
+            n.location[1],
+            n.color, // bg-color
+            n.rotation, // rotate-class
+            "absolute px-3 py-2 rounded shadow-md whitespace-pre-wrap",
+            "hover:scale-110 active:scale-90 duration-300 select-none",
+          ].join(" ")}
         >
           {n.comment}
         </div>
@@ -161,7 +183,7 @@ export default function CommentSection() {
           stroke-width="1.5"
           stroke="currentColor"
           className="absolute right-5 bottom-5 size-6 hover:scale-110 active:scale-90 duration-300"
-          onClick={Overlay}
+          onClick={openCompose}
         >
           <path
             stroke-linecap="round"

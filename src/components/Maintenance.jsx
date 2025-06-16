@@ -1,6 +1,6 @@
 export default function Maintenance() {
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center h-auto">
         <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
             Maintenance Mode
         </h1>
