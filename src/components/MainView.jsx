@@ -94,7 +94,7 @@ export default function MainView() {
 
           {/* Projects */}
           <div
-            className={`order-5 lg:col-span-1 lg:row-start-3 lg:col-start-1 ${sectionStyle}`}
+            className={`hidden order-4 lg:col-span-1 lg:row-start-3 lg:col-start-1 ${sectionStyle}`}
           >
             <div className="snap-x">
               <Maintenance />
@@ -103,7 +103,7 @@ export default function MainView() {
 
           {/* Comments */}
           <div
-            className={`order-4 min-h-[250px] lg:col-span-1 lg:row-start-3 lg:col-start-2 ${sectionStyle}`}
+            className={`hidden lg:block min-h-[250px] lg:col-span-2 lg:row-start-3 lg:col-start-1 ${sectionStyle}`}
           >
             <Comment />
           </div>
@@ -163,7 +163,7 @@ export default function MainView() {
 
           {/* Tech Stack */}
           <div
-            className={`order-6 lg:row-start-3 lg:col-start-3 ${sectionStyle}`}
+            className={`order-5 lg:row-start-3 lg:col-start-3 ${sectionStyle}`}
           >
             <div className="w-full grid grid-flow-row grid-cols-4 justify-items-center gap-4">
               <svg className="size-18" viewBox="0 0 48 48">
