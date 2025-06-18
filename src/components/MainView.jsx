@@ -96,14 +96,14 @@ export default function MainView() {
 
           {/* Projects */}
           <div
-            className={`order-4 h-auto lg:min-h-[250px] lg:col-span-1 lg:row-start-3 lg:col-start-1 flex items-center justify-center p-2 lg:p-3 rounded-xl shadow-lg`}
+            className={`hidden order-4 h-auto lg:min-h-[250px] lg:col-span-1 lg:row-start-3 lg:col-start-1 flex items-center justify-center p-2 lg:p-3 rounded-xl shadow-lg`}
           >
             <Project />
           </div>
 
           {/* Comments */}
           <div
-            className={`hidden lg:block min-h-[250px] lg:col-span-1 lg:row-start-3 lg:col-start-2 ${sectionStyle}`}
+            className={`hidden lg:block min-h-[250px] lg:col-span-2 lg:row-start-3 lg:col-start-1 ${sectionStyle}`}
           >
             <Comment />
           </div>
