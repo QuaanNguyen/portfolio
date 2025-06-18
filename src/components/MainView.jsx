@@ -2,6 +2,7 @@ import ProfilePic from "../assets/picture.JPEG";
 import SQLIcon from "../assets/sql.svg";
 import Resume from "../assets/resume.pdf";
 import Comment from "./Comment";
+import Project from "./Project";
 import Maintenance from "./Maintenance";
 import Copyright from "./Copyright";
 
@@ -10,6 +11,7 @@ export default function MainView() {
     "lg:overflow-hidden flex items-center justify-center p-2 lg:p-6 rounded-xl shadow-lg";
   const experienceStyle =
     "p-2 rounded-xl border border-transparent hover:shadow-lg hover:border-gray-300 dark:shadow-gray-500 transition-shadow duration-100";
+
   return (
     <>
       <a href={Resume} download="QuanResume" className="hidden md:block">
@@ -79,12 +81,12 @@ export default function MainView() {
 
           {/* Profile Section */}
           <div
-            className={`order-1 flex-auto p-4 lg:row-span-2 lg:col-start-2 ${sectionStyle} flex-col justify-center items-center gap-4 lg:justify-evenly `}
+            className={`order-1 flex-auto p-4 lg:row-span-2 lg:col-start-2 ${sectionStyle} flex-col justify-center items-center lg:gap-2 xl:gap-3 2xl:gap-4 lg:justify-evenly`}
           >
             <img
               src={ProfilePic}
               alt="Profile"
-              className="size-50 lg:size-85 object-cover rounded-2xl shadow-lg mb-3"
+              className="size-50 md:size-70 xl:size-80 object-cover rounded-2xl shadow-lg mb-3"
             />
             <div className="text-center text-4xl font-bold">Quan Nguyen</div>
             <div className="text-center text-lg text-gray-700 dark:text-gray-300">
@@ -94,11 +96,9 @@ export default function MainView() {
 
           {/* Projects */}
           <div
-            className={`hidden order-4 lg:col-span-1 lg:row-start-3 lg:col-start-1 ${sectionStyle}`}
+            className={`hidden order-4 h-auto lg:min-h-[250px] lg:col-span-1 lg:row-start-3 lg:col-start-1 flex items-center justify-center p-2 lg:p-3 rounded-xl shadow-lg`}
           >
-            <div className="snap-x">
-              <Maintenance />
-            </div>
+            <Project />
           </div>
 
           {/* Comments */}
@@ -166,14 +166,20 @@ export default function MainView() {
             className={`order-5 lg:row-start-3 lg:col-start-3 ${sectionStyle}`}
           >
             <div className="w-full grid grid-flow-row grid-cols-4 justify-items-center gap-4">
-              <svg className="size-18" viewBox="0 0 48 48">
+              <svg
+                className="size-15 hover:scale-105 transition duration-300"
+                viewBox="0 0 48 48"
+              >
                 <path fill="#ffd600" d="M6,42V6h36v36H6z"></path>
                 <path
                   fill="#000001"
                   d="M29.538 32.947c.692 1.124 1.444 2.201 3.037 2.201 1.338 0 2.04-.665 2.04-1.585 0-1.101-.726-1.492-2.198-2.133l-.807-.344c-2.329-.988-3.878-2.226-3.878-4.841 0-2.41 1.845-4.244 4.728-4.244 2.053 0 3.528.711 4.592 2.573l-2.514 1.607c-.553-.988-1.151-1.377-2.078-1.377-.946 0-1.545.597-1.545 1.377 0 .964.6 1.354 1.985 1.951l.807.344C36.452 29.645 38 30.839 38 33.523 38 36.415 35.716 38 32.65 38c-2.999 0-4.702-1.505-5.65-3.368L29.538 32.947zM17.952 33.029c.506.906 1.275 1.603 2.381 1.603 1.058 0 1.667-.418 1.667-2.043V22h3.333v11.101c0 3.367-1.953 4.899-4.805 4.899-2.577 0-4.437-1.746-5.195-3.368L17.952 33.029z"
                 ></path>
               </svg>
-              <svg className="size-18 " viewBox="0 0 48 48">
+              <svg
+                className="size-15 hover:scale-105 transition duration-300"
+                viewBox="0 0 48 48"
+              >
                 <path
                   fill="#37474f"
                   fill-rule="evenodd"
@@ -211,7 +217,10 @@ export default function MainView() {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <svg className="size-18" viewBox="0 0 48 48">
+              <svg
+                className="size-15 hover:scale-105 transition duration-300"
+                viewBox="0 0 48 48"
+              >
                 <path
                   fill="#283593"
                   fill-rule="evenodd"
@@ -237,7 +246,10 @@ export default function MainView() {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <svg className="size-18" viewBox="0 0 48 48">
+              <svg
+                className="size-15 hover:scale-105 transition duration-300"
+                viewBox="0 0 48 48"
+              >
                 <path
                   fill="#00549d"
                   fill-rule="evenodd"
@@ -275,7 +287,10 @@ export default function MainView() {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <svg className="size-18" viewBox="0 0 48 48">
+              <svg
+                className="size-15 hover:scale-105 transition duration-300"
+                viewBox="0 0 48 48"
+              >
                 <path
                   fill="#F44336"
                   d="M23.65,24.898c-0.998-1.609-1.722-2.943-2.725-5.455C19.229,15.2,31.24,11.366,26.37,3.999c2.111,5.089-7.577,8.235-8.477,12.473C17.07,20.37,23.645,24.898,23.65,24.898z"
@@ -307,7 +322,10 @@ export default function MainView() {
                   ></path>
                 </g>
               </svg>
-              <svg className="size-18" viewBox="0 0 48 48">
+              <svg
+                className="size-15 hover:scale-105 transition duration-300"
+                viewBox="0 0 48 48"
+              >
                 <path
                   fill="#0277BD"
                   d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"
@@ -317,7 +335,10 @@ export default function MainView() {
                   d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549-2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5,4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5-1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"
                 ></path>
               </svg>
-              <svg className="size-18" viewBox="0 0 48 48">
+              <svg
+                className="size-15 hover:scale-105 transition duration-300"
+                viewBox="0 0 48 48"
+              >
                 <linearGradient
                   id="__u04104Xr4WevsSMNpCfa_CLvQeiwFpit4_gr1"
                   x1="7.773"
@@ -349,7 +370,10 @@ export default function MainView() {
                   d="M39.051,33.469 c-0.578-0.945-1.437-1.669-2.442-2.105c3.401-0.841,5.926-3.904,5.926-7.564c0-4.307-3.493-7.8-7.8-7.8H20.001v26h6.933V31.6h1.955 c0.967,0,1.856,0.525,2.321,1.373L36.175,42h8.093L39.051,33.469z M26.935,21.2h6.067c1.435,0,2.6,1.165,2.6,2.6 s-1.165,2.6-2.6,2.6h-6.067V21.2z"
                 ></path>
               </svg>
-              <img src={SQLIcon} className="size-17" />
+              <img
+                src={SQLIcon}
+                className="size-14 hover:scale-105 transition duration-300"
+              />
             </div>
           </div>
           <div className="order-last lg:hidden mt-10">
