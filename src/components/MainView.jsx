@@ -8,14 +8,14 @@ import Copyright from "./Copyright";
 
 export default function MainView() {
   const sectionStyle =
-    "lg:overflow-hidden flex items-center justify-center p-2 lg:p-6 rounded-xl shadow-lg";
+    "lg:overflow-auto flex items-center justify-center p-2 lg:p-6 rounded-xl shadow-lg";
   const experienceStyle =
     "p-2 rounded-xl border border-transparent hover:shadow-lg hover:border-gray-300 dark:shadow-gray-500 transition-shadow duration-100";
 
   return (
     <>
       <a href={Resume} download="QuanResume" className="hidden md:block">
-        <button className="py-3 px-4 top-5.5 absolute flex gap-4 md:right-1/8 xl:right-1/11 text-black dark:text-white dark:shadow-gray-500 hover:scale-110 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer">
+        <button className="py-3 px-4 top-5.5 absolute flex gap-4 md:right-1/8 xl:right-1/11  text-black dark:text-white dark:shadow-gray-500 hover:scale-110 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -81,7 +81,7 @@ export default function MainView() {
 
           {/* Profile Section */}
           <div
-            className={`order-1 flex-auto p-4 lg:row-span-2 lg:col-start-2 ${sectionStyle} flex-col justify-center items-center lg:gap-2 xl:gap-3 2xl:gap-4 lg:justify-evenly`}
+            className={`order-1 flex-auto p-4 lg:row-span-2 lg:col-start-2 ${sectionStyle} flex-col justify-center items-center lg:gap-2 xl:gap-3 lg:justify-evenly`}
           >
             <img
               src={ProfilePic}
