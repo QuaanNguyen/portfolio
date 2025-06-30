@@ -376,7 +376,7 @@ export default function MainView() {
               />
             </div>
           </div>
-          <div className="order-last lg:hidden mt-10">
+          <div className="order-last lg:hidden mt-30">
             <Copyright />
           </div>
         </div>
