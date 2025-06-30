@@ -8,7 +8,7 @@ import Copyright from "./Copyright";
 
 export default function MainView() {
   const sectionStyle =
-    "lg:overflow-hidden flex items-center justify-center p-2 lg:p-6 rounded-xl shadow-lg";
+    "lg:overflow-auto flex items-center justify-center p-2 lg:p-6 rounded-xl shadow-lg";
   const experienceStyle =
     "p-2 rounded-xl border border-transparent hover:shadow-lg hover:border-gray-300 dark:shadow-gray-500 transition-shadow duration-100";
 
@@ -163,11 +163,11 @@ export default function MainView() {
 
           {/* Tech Stack */}
           <div
-            className={`order-5 lg:row-start-3 lg:col-start-3 ${sectionStyle}`}
+            className={`overflow-hidden order-5 lg:row-start-3 lg:col-start-3 ${sectionStyle}`}
           >
             <div className="w-full grid grid-flow-row grid-cols-4 justify-items-center gap-4">
               <svg
-                className="size-15 hover:scale-105 transition duration-300"
+                className="size-13 lg:size-15 hover:scale-105 transition duration-300"
                 viewBox="0 0 48 48"
               >
                 <path fill="#ffd600" d="M6,42V6h36v36H6z"></path>
@@ -177,7 +177,7 @@ export default function MainView() {
                 ></path>
               </svg>
               <svg
-                className="size-15 hover:scale-105 transition duration-300"
+                className="size-13 lg:size-15 hover:scale-105 transition duration-300"
                 viewBox="0 0 48 48"
               >
                 <path
@@ -218,7 +218,7 @@ export default function MainView() {
                 ></path>
               </svg>
               <svg
-                className="size-15 hover:scale-105 transition duration-300"
+                className="size-13 lg:size-15 hover:scale-105 transition duration-300"
                 viewBox="0 0 48 48"
               >
                 <path
@@ -247,7 +247,7 @@ export default function MainView() {
                 ></path>
               </svg>
               <svg
-                className="size-15 hover:scale-105 transition duration-300"
+                className="size-13 lg:size-15 hover:scale-105 transition duration-300"
                 viewBox="0 0 48 48"
               >
                 <path
@@ -288,7 +288,7 @@ export default function MainView() {
                 ></path>
               </svg>
               <svg
-                className="size-15 hover:scale-105 transition duration-300"
+                className="size-13 lg:size-15 hover:scale-105 transition duration-300"
                 viewBox="0 0 48 48"
               >
                 <path
@@ -323,7 +323,7 @@ export default function MainView() {
                 </g>
               </svg>
               <svg
-                className="size-15 hover:scale-105 transition duration-300"
+                className="size-13 lg:size-15 hover:scale-105 transition duration-300"
                 viewBox="0 0 48 48"
               >
                 <path
@@ -336,7 +336,7 @@ export default function MainView() {
                 ></path>
               </svg>
               <svg
-                className="size-15 hover:scale-105 transition duration-300"
+                className="size-13 lg:size-15 hover:scale-105 transition duration-300"
                 viewBox="0 0 48 48"
               >
                 <linearGradient
@@ -372,7 +372,7 @@ export default function MainView() {
               </svg>
               <img
                 src={SQLIcon}
-                className="size-14 hover:scale-105 transition duration-300"
+                className="size-12 lg:size-14 hover:scale-105 transition duration-300"
               />
             </div>
           </div>
