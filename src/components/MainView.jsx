@@ -1,4 +1,4 @@
-import ProfilePic from "../assets/picture.JPG";
+import ProfilePic from "../assets/picture.jpg";
 import SQLIcon from "../assets/sql.svg";
 import Resume from "../assets/resume.pdf";
 import Comment from "./Comment";
