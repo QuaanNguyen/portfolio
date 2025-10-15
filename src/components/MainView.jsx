@@ -1,4 +1,4 @@
-import ProfilePic from "../assets/picture.JPEG";
+import ProfilePic from "../assets/picture.jpg";
 import SQLIcon from "../assets/sql.svg";
 import Resume from "../assets/resume.pdf";
 import Comment from "./Comment";
@@ -42,20 +42,24 @@ export default function MainView() {
             <div className="max-w-8/9 leading-relaxed ">
               <h2 className="text-2xl font-bold mb-4 text-left">about me</h2>
               <p className="mb-4">
-                I am currently a{" "}
-                <a className="font-semibold">full stack engineer</a>, looking
-                for new grad opportunities in the US.
+                I am currently finishing my{" "}
+                <a className="font-semibold">
+                  Master's in Computer Engineering
+                </a>
+                , looking to jump into the tech industry.
                 <br />
-                <br />I have done two internships, both about building solutions
-                for stakeholders, focused on{" "}
+                <br />
+                With over <a className="font-bold">3 YOE</a> in building
+                solutions for stakeholders, focused on{" "}
                 <a className="font-semibold">optimizing system</a>. My mission
-                is to build products that make people's lives easier and more
-                enjoyable.
+                is to build impactful products and thrive for innovation,
+                enabling automation and accessibility for all.
                 <br />
                 <br />
                 In order to achieve that, I take great care in understanding the
-                needs of users, and pay attention to{" "}
-                <a className="font-semibold">system design and architecture</a>.
+                problems and baselines, especially{" "}
+                <a className="font-semibold">current limitations</a> to produce a novel
+                solution.
               </p>
 
               <h2 className="text-2xl font-bold mt-4 mb-4 text-left">
@@ -88,7 +92,7 @@ export default function MainView() {
               alt="Profile"
               className="size-50 md:size-70 xl:size-80 object-cover rounded-2xl shadow-lg mb-3"
             />
-            <div className="text-center text-4xl font-bold">Quan Nguyen</div>
+            <div className="text-center text-3xl lg:text-4xl font-bold">Quan <a className="font-light">(Anh)</a> Nguyen</div>
             <div className="text-center text-lg text-gray-700 dark:text-gray-300">
               developer · AI enthusiast · community builder
             </div>
@@ -96,14 +100,15 @@ export default function MainView() {
 
           {/* Projects */}
           <div
-            className={`hidden order-4 h-auto lg:min-h-[250px] lg:col-span-1 lg:row-start-3 lg:col-start-1 flex items-center justify-center p-2 lg:p-3 rounded-xl shadow-lg`}
+            className={`hidden lg:block order-4 h-auto lg:min-h-[250px] lg:col-span-1 lg:row-start-3 lg:col-start-2 flex items-center justify-center p-2 lg:p-3 rounded-xl shadow-lg`}
           >
+            {/* <Maintenance /> */}
             <Project />
           </div>
 
           {/* Comments */}
           <div
-            className={`hidden lg:block min-h-[250px] lg:col-span-2 lg:row-start-3 lg:col-start-1 ${sectionStyle}`}
+            className={`hidden lg:block min-h-[250px] lg:col-span-1 lg:row-start-3 lg:col-start-1 ${sectionStyle}`}
           >
             <Comment />
           </div>
@@ -114,6 +119,20 @@ export default function MainView() {
           >
             <div className="max-w-9/10 leading-relaxed">
               <h2 className="text-2xl font-bold mb-4 text-left">experiences</h2>
+
+              <div className={experienceStyle}>
+                <p className="font-semibold">Next Lab Associate - AI/ML</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  ASU Next Lab · Oct 2025 – Current
+                </p>
+              </div>
+
+              <div className={experienceStyle}>
+                <p className="font-semibold">Graduate Teaching Assistant</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  Arizona State University · Aug 2025 – Current
+                </p>
+              </div>
 
               <div className={experienceStyle}>
                 <p className="font-semibold">Software Engineer Intern</p>
