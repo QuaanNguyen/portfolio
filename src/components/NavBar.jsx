@@ -88,7 +88,7 @@ function SocialIcons({ isDropdown }) {
       </a>
 
       <a
-        href="https://github.com/quan-ng03"
+        href="https://github.com/QuaanNguyen"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub"
