@@ -8,7 +8,7 @@ import Copyright from "./Copyright";
 
 export default function MainView() {
   const sectionStyle =
-    "lg:overflow-auto flex items-center justify-center p-2 lg:p-6 rounded-xl shadow-lg";
+    "flex flex-col items-center justify-center p-2 lg:p-6 rounded-xl shadow-lg max-h-[85svh]";
   const experienceStyle =
     "p-2 rounded-xl border border-transparent hover:shadow-lg hover:border-gray-300 dark:shadow-gray-500 transition-shadow duration-100";
 
@@ -58,8 +58,8 @@ export default function MainView() {
                 <br />
                 In order to achieve that, I take great care in understanding the
                 problems and baselines, especially{" "}
-                <a className="font-semibold">current limitations</a> to produce a novel
-                solution.
+                <a className="font-semibold">current limitations</a> to produce
+                a novel solution.
               </p>
 
               <h2 className="text-2xl font-bold mt-4 mb-4 text-left">
@@ -92,7 +92,9 @@ export default function MainView() {
               alt="Profile"
               className="size-50 md:size-70 xl:size-80 object-cover rounded-2xl shadow-lg mb-3"
             />
-            <div className="text-center text-3xl lg:text-4xl font-bold">Quan <a className="font-light">(Anh)</a> Nguyen</div>
+            <div className="text-center text-3xl lg:text-4xl font-bold">
+              Quan <a className="font-light">(Anh)</a> Nguyen
+            </div>
             <div className="text-center text-lg text-gray-700 dark:text-gray-300">
               developer · AI enthusiast · community builder
             </div>
@@ -117,9 +119,10 @@ export default function MainView() {
           <div
             className={`order-3 lg:row-span-2 lg:col-start-3 ${sectionStyle}`}
           >
-            <div className="max-w-9/10 leading-relaxed">
-              <h2 className="text-2xl font-bold mb-4 text-left">experiences</h2>
-
+            <h2 className="w-full max-w-11/12 sticky top-7 text-2xl font-bold mb-4 text-left">
+              experiences
+            </h2>
+            <div className="max-w-11/12 leading-relaxed overflow-y-auto pr-2">
               <div className={experienceStyle}>
                 <p className="font-semibold">Next Lab Associate - AI/ML</p>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
