@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import useDarkMode from "../hooks/useDarkMode";
 import Resume from "../assets/resume.pdf";
 import {
@@ -29,13 +30,35 @@ export default function NavBar() {
       </div>
 
       {/* Name */}
-      <div className="absolute top-3 md:top-5 left-1/2 transform -translate-x-1/2 text-nowrap text-4xl md:text-5xl underline underline-offset-2 select-none cursor-default">
+      <Link to="/" className="absolute top-3 md:top-5 left-1/2 transform -translate-x-1/2 text-nowrap text-4xl md:text-5xl underline underline-offset-2 select-none cursor-pointer hover:scale-105 transition-transform duration-300">
         quan nguyen
-      </div>
+      </Link>
 
       {/* Right icons for medium and up */}
-      <div className="absolute top-7 right-7 hidden md:grid grid-flow-col gap-5">
+      <div className="absolute top-7 right-7 hidden md:flex items-center gap-5">
+        <Link to="/league-impostor" className="font-bold text-lg hover:underline underline-offset-4">
+          Games
+        </Link>
         <SocialIcons />
+        <a href={Resume} download="QuanResume">
+          <button className="py-2 px-4 flex gap-2 text-black dark:text-white dark:shadow-gray-500 hover:scale-105 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer items-center bg-white dark:bg-neutral-800">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="size-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            <p className="duration-0 font-bold">Resume</p>
+          </button>
+        </a>
       </div>
 
       {/* Hamburger for small screens */}
@@ -54,6 +77,13 @@ export default function NavBar() {
         {/* Dropdown menu */}
         {menuOpen && (
           <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-800 rounded-md shadow-lg p-2 flex flex-col items-start z-50">
+            <Link
+              to="/league-impostor"
+              className="flex items-center gap-2 p-2 w-full hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md transition font-bold"
+              onClick={() => setMenuOpen(false)}
+            >
+              Games
+            </Link>
             <SocialIcons isDropdown />
           </div>
         )}

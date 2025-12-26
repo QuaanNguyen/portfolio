@@ -1,8 +1,10 @@
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import RadialBackground from "./components/RadialBackground";
 import Copyright from "./components/Copyright";
 import MainView from "./components/MainView";
+import LeagueImpostor from "./components/LeagueImpostor";
 
 function App() {
   return (
@@ -49,7 +51,10 @@ function App() {
           to="to-teal-200"
         />
         <NavBar />
-        <MainView />
+        <Routes>
+          <Route path="/" element={<MainView />} />
+          <Route path="/league-impostor" element={<LeagueImpostor />} />
+        </Routes>
         <div className="hidden lg:block">
           <Copyright />
         </div>
