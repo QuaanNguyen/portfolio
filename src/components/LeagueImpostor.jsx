@@ -139,7 +139,7 @@ export default function LeagueImpostor({ setIsOverlayOpen }) {
             )}
 
             {phase === "playing" && !revealedCard && (
-                <div className="w-full max-w-2xl flex flex-col items-center gap-8 px-8 md:px-0">
+                <div className="w-full max-w-2xl flex flex-col items-center gap-8 px-8 md:px-0 h-[calc(100vh-5rem)] overflow-y-auto">
                     <h2 className="text-2xl font-bold bg-white/50 dark:bg-black/50 px-4 py-2 rounded-lg backdrop-blur-sm text-center">
                         Tap a card to reveal your role
                     </h2>
@@ -151,7 +151,7 @@ export default function LeagueImpostor({ setIsOverlayOpen }) {
                                 onClick={() => handleCardClick(card)}
                                 disabled={card.revealed}
                                 className={`
-                  aspect-[3/4] rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center text-xl font-bold relative overflow-hidden
+                  w-full h-24 sm:h-28 md:h-32 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center text-xl font-bold relative overflow-hidden
                   ${card.revealed
                                         ? "bg-gray-300 dark:bg-gray-800 cursor-default opacity-50"
                                         : "bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-800 dark:to-black hover:scale-105 cursor-pointer text-gray-800 dark:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:before:content-[''] hover:before:absolute hover:before:inset-0 hover:before:bg-white/10 hover:before:animate-pulse"

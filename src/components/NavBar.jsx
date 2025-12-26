@@ -133,7 +133,7 @@ function SocialIcons({ isDropdown, isOverlayOpen }) {
         </svg>
         {isDropdown && <span>GitHub</span>}
       </a>
-      <a href={Resume} download="QuanResume" className="md:hidden mt-0.5">
+      <a href={Resume} download="QuanResume" className="lg:hidden mt-0.5">
         <button className={`py-3 px-4 top-5.5 flex gap-4 right-1/11 dark:shadow-gray-500 hover:scale-105 active:scale-90 duration-300 rounded-xl shadow-lg inset-ring-2 cursor-pointer ${isOverlayOpen ? 'text-white border border-white bg-transparent' : 'text-black dark:text-white'}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
