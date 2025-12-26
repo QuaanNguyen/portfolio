@@ -41,7 +41,7 @@ const getChampionImage = (name) => {
     return championImages[path];
 };
 
-export default function LeagueImpostor() {
+export default function LeagueImpostor({ setIsOverlayOpen }) {
     const [phase, setPhase] = useState("setup"); // setup, playing
     const [playerCount, setPlayerCount] = useState(5);
     const [impostorCount, setImpostorCount] = useState(1);
@@ -81,25 +81,28 @@ export default function LeagueImpostor() {
     const handleCardClick = (card) => {
         if (card.revealed) return;
         setRevealedCard(card);
+        setIsOverlayOpen(true);
     };
 
     const handleConfirmReveal = () => {
         setCards(cards.map(c => c.id === revealedCard.id ? { ...c, revealed: true } : c));
         setRevealedCard(null);
+        setIsOverlayOpen(false);
     };
 
     const restartGame = () => {
         setPhase("setup");
         setCards([]);
         setRevealedCard(null);
+        setIsOverlayOpen(false);
     };
 
     const allRevealed = cards.length > 0 && cards.every(c => c.revealed);
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[80vh] w-full p-4 text-gray-800 dark:text-white relative z-10">
+        <div className="flex flex-col items-center justify-center min-h-[80vh] w-full px-6 py-12 md:p-8 text-gray-800 dark:text-white relative z-10">
             {phase === "setup" && (
-                <div className="bg-white/90 dark:bg-black/80 backdrop-blur-md p-8 rounded-2xl shadow-xl flex flex-col gap-6 w-full max-w-md border border-gray-200 dark:border-gray-700">
+                <div className="bg-white/90 dark:bg-black/80 backdrop-blur-md p-8 rounded-2xl shadow-xl flex flex-col gap-6 w-full max-w-md border border-gray-200 dark:border-gray-700 mx-4">
                     <h1 className="text-3xl font-bold text-center mb-2">League Impostor</h1>
 
                     <div className="flex flex-col gap-2">
@@ -110,7 +113,7 @@ export default function LeagueImpostor() {
                             max="20"
                             value={playerCount}
                             onChange={(e) => setPlayerCount(parseInt(e.target.value) || 0)}
-                            className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400"
                         />
                     </div>
 
@@ -122,7 +125,7 @@ export default function LeagueImpostor() {
                             max={playerCount - 1}
                             value={impostorCount}
                             onChange={(e) => setImpostorCount(parseInt(e.target.value) || 0)}
-                            className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400"
                         />
                     </div>
 
@@ -136,12 +139,12 @@ export default function LeagueImpostor() {
             )}
 
             {phase === "playing" && !revealedCard && (
-                <div className="w-full max-w-4xl flex flex-col items-center gap-8">
-                    <h2 className="text-2xl font-bold bg-white/50 dark:bg-black/50 px-4 py-2 rounded-lg backdrop-blur-sm">
+                <div className="w-full max-w-2xl flex flex-col items-center gap-8 px-8 md:px-0">
+                    <h2 className="text-2xl font-bold bg-white/50 dark:bg-black/50 px-4 py-2 rounded-lg backdrop-blur-sm text-center">
                         Tap a card to reveal your role
                     </h2>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 w-full">
                         {cards.map((card) => (
                             <button
                                 key={card.id}
@@ -151,7 +154,7 @@ export default function LeagueImpostor() {
                   aspect-[3/4] rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center text-xl font-bold relative overflow-hidden
                   ${card.revealed
                                         ? "bg-gray-300 dark:bg-gray-800 cursor-default opacity-50"
-                                        : "bg-gradient-to-br from-blue-400/80 to-cyan-300/80 hover:scale-105 cursor-pointer text-white hover:shadow-[0_0_20px_rgba(0,149,255,0.6)] hover:before:content-[''] hover:before:absolute hover:before:inset-0 hover:before:bg-white/20 hover:before:animate-pulse"
+                                        : "bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-800 dark:to-black hover:scale-105 cursor-pointer text-gray-800 dark:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:before:content-[''] hover:before:absolute hover:before:inset-0 hover:before:bg-white/10 hover:before:animate-pulse"
                                     }
                 `}
                             >
@@ -181,8 +184,8 @@ export default function LeagueImpostor() {
                                 <p className="text-5xl font-black text-red-600 tracking-wider">IMPOSTOR</p>
                             ) : (
                                 <>
-                                    <p className="text-4xl font-black text-blue-600 mb-2">CHAMPION</p>
-                                    <div className="w-full aspect-square max-w-[250px] rounded-xl overflow-hidden shadow-lg border-2 border-blue-500/30">
+                                    <p className="text-4xl font-black text-gray-800 dark:text-gray-200 mb-2">CHAMPION</p>
+                                    <div className="w-full aspect-square max-w-[250px] rounded-xl overflow-hidden shadow-lg border-2 border-gray-500/30">
                                         {getChampionImage(revealedCard.champion) ? (
                                             <img
                                                 src={getChampionImage(revealedCard.champion)}

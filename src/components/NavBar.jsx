@@ -9,12 +9,12 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/solid";
 
-export default function NavBar() {
+export default function NavBar({ isOverlayOpen }) {
   const { toggleDarkMode, isDarkMode } = useDarkMode();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="w-screen relative text-gray-800 dark:text-white transition-colors duration-50 z-50">
+    <div className={`w-screen h-20 md:h-24 relative transition-colors duration-50 z-50 ${isOverlayOpen ? 'text-white' : 'text-gray-800 dark:text-white'}`}>
       {/* Dark Mode Toggle */}
       <div className="absolute top-5 md:top-7 left-5 md:left-7">
         <button
@@ -35,13 +35,13 @@ export default function NavBar() {
       </Link>
 
       {/* Right icons for medium and up */}
-      <div className="absolute top-7 right-7 hidden md:flex items-center gap-5">
+      <div className="absolute top-7 right-7 hidden lg:flex items-center gap-5">
         <Link to="/league-impostor" className="font-bold text-lg hover:underline underline-offset-4">
           Games
         </Link>
-        <SocialIcons />
+        <SocialIcons isOverlayOpen={isOverlayOpen} />
         <a href={Resume} download="QuanResume">
-          <button className="py-2 px-4 flex gap-2 text-black dark:text-white dark:shadow-gray-500 hover:scale-105 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer items-center bg-white dark:bg-neutral-800">
+          <button className={`py-2 px-4 flex gap-2 hover:scale-105 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer items-center ${isOverlayOpen ? 'bg-transparent text-white border border-white' : 'bg-white dark:bg-neutral-800 text-black dark:text-white dark:shadow-gray-500'}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -62,7 +62,7 @@ export default function NavBar() {
       </div>
 
       {/* Hamburger for small screens */}
-      <div className="absolute top-5 right-5 md:hidden">
+      <div className="absolute top-5 right-5 lg:hidden">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="size-8 flex items-center justify-center rounded-full cursor-pointer"
@@ -76,7 +76,7 @@ export default function NavBar() {
 
         {/* Dropdown menu */}
         {menuOpen && (
-          <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-800 rounded-md shadow-lg p-2 flex flex-col items-start z-50">
+          <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-800 text-gray-800 dark:text-white rounded-md shadow-lg p-2 flex flex-col items-start z-50">
             <Link
               to="/league-impostor"
               className="flex items-center gap-2 p-2 w-full hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md transition font-bold"
@@ -92,7 +92,7 @@ export default function NavBar() {
   );
 }
 
-function SocialIcons({ isDropdown }) {
+function SocialIcons({ isDropdown, isOverlayOpen }) {
   const linkClass =
     "flex items-center gap-2 p-2 w-full hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md transition";
   const iconClass =
@@ -134,7 +134,7 @@ function SocialIcons({ isDropdown }) {
         {isDropdown && <span>GitHub</span>}
       </a>
       <a href={Resume} download="QuanResume" className="md:hidden mt-0.5">
-        <button className="py-3 px-4 top-5.5 flex gap-4 right-1/11 text-black dark:text-white dark:shadow-gray-500 hover:scale-105 active:scale-90 duration-300 rounded-xl shadow-lg inset-ring-2 cursor-pointer">
+        <button className={`py-3 px-4 top-5.5 flex gap-4 right-1/11 dark:shadow-gray-500 hover:scale-105 active:scale-90 duration-300 rounded-xl shadow-lg inset-ring-2 cursor-pointer ${isOverlayOpen ? 'text-white border border-white bg-transparent' : 'text-black dark:text-white'}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
