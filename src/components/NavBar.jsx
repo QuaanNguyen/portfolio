@@ -36,7 +36,7 @@ export default function NavBar({ isOverlayOpen }) {
 
       {/* Right icons for medium and up */}
       <div className="absolute top-7 right-7 hidden lg:flex items-center gap-5">
-        <Link to="/league-impostor" className="font-bold text-lg hover:underline underline-offset-4">
+        <Link to="/league-impostor" className="font-bold text-lg hover:underline underline-offset-4 hover:scale-105 active:scale-90 duration-300 ">
           Games
         </Link>
         <SocialIcons isOverlayOpen={isOverlayOpen} />
@@ -77,13 +77,6 @@ export default function NavBar({ isOverlayOpen }) {
         {/* Dropdown menu */}
         {menuOpen && (
           <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-800 text-gray-800 dark:text-white rounded-md shadow-lg p-2 flex flex-col items-start z-50">
-            <Link
-              to="/league-impostor"
-              className="flex items-center gap-2 p-2 w-full hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md transition font-bold"
-              onClick={() => setMenuOpen(false)}
-            >
-              Games
-            </Link>
             <SocialIcons isDropdown />
           </div>
         )}
@@ -100,6 +93,24 @@ function SocialIcons({ isDropdown, isOverlayOpen }) {
 
   return (
     <>
+      {isDropdown && (
+        <Link
+          to="/league-impostor"
+          aria-label="Games"
+          className={linkClass}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            className={iconClass}
+          >
+            <path d="M11.5 6.027a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm-6.5-3h1v1h1v1h-1v1h-1v-1h-1v-1h1v-1z"/>
+            <path d="M3.051 3.26a.5.5 0 0 1 .354-.613l1.932-.518a.5.5 0 0 1 .62.39c.655-.079 1.35-.117 2.043-.117.72 0 1.443.041 2.12.126a.5.5 0 0 1 .622-.399l1.932.518a.5.5 0 0 1 .306.729c.14.09.266.19.373.297.408.408.78 1.05 1.095 1.772.32.733.599 1.591.805 2.466.206.875.34 1.78.364 2.606.024.816-.059 1.602-.328 2.21a1.42 1.42 0 0 1-1.445.83c-.636-.067-1.115-.394-1.513-.773-.245-.232-.496-.526-.739-.808-.126-.148-.25-.292-.368-.423-.728-.804-1.597-1.527-3.224-1.527-1.627 0-2.496.723-3.224 1.527-.119.131-.242.275-.368.423-.243.282-.494.575-.739.808-.398.38-.877.706-1.513.773a1.42 1.42 0 0 1-1.445-.83c-.27-.608-.352-1.395-.329-2.21.024-.826.16-1.73.365-2.606.206-.875.486-1.733.805-2.466.315-.722.687-1.364 1.094-1.772a2.34 2.34 0 0 1 .433-.335.504.504 0 0 1-.028-.079z"/>
+          </svg>
+          <span>Games</span>
+        </Link>
+      )}
+      
       <a
         href="https://www.linkedin.com/in/quan-nguyen-127650221/"
         target="_blank"
