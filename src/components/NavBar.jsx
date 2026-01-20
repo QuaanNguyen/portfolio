@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import useDarkMode from "../hooks/useDarkMode";
 import Resume from "../assets/resume.pdf";
 import {
@@ -8,12 +9,12 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/solid";
 
-export default function NavBar() {
+export default function NavBar({ isOverlayOpen }) {
   const { toggleDarkMode, isDarkMode } = useDarkMode();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="w-screen relative text-gray-800 dark:text-white transition-colors duration-50 z-50">
+    <div className={`w-screen h-20 md:h-24 relative transition-colors duration-50 z-50 ${isOverlayOpen ? 'text-white' : 'text-gray-800 dark:text-white'}`}>
       {/* Dark Mode Toggle */}
       <div className="absolute top-5 md:top-7 left-5 md:left-7">
         <button
@@ -29,17 +30,39 @@ export default function NavBar() {
       </div>
 
       {/* Name */}
-      <div className="absolute top-3 md:top-5 left-1/2 transform -translate-x-1/2 text-nowrap text-4xl md:text-5xl underline underline-offset-2 select-none cursor-default">
+      <Link to="/" className="absolute top-3 md:top-5 left-1/2 transform -translate-x-1/2 text-nowrap text-4xl md:text-5xl underline underline-offset-2 select-none cursor-pointer hover:scale-105 transition-transform duration-300">
         quan nguyen
-      </div>
+      </Link>
 
       {/* Right icons for medium and up */}
-      <div className="absolute top-7 right-7 hidden md:grid grid-flow-col gap-5">
-        <SocialIcons />
+      <div className="absolute top-7 right-7 hidden lg:flex items-center gap-5">
+        <Link to="/league-impostor" className="font-bold text-lg hover:underline underline-offset-4 hover:scale-105 active:scale-90 duration-300 ">
+          Games
+        </Link>
+        <SocialIcons isOverlayOpen={isOverlayOpen} />
+        <a href={Resume} download="QuanResume">
+          <button className={`py-2 px-4 flex gap-2 hover:scale-105 active:scale-90 duration-300 rounded-full shadow-lg inset-ring-2 cursor-pointer items-center ${isOverlayOpen ? 'bg-transparent text-white border border-white' : 'bg-white dark:bg-neutral-800 text-black dark:text-white dark:shadow-gray-500'}`}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="size-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            <p className="duration-0 font-bold">Resume</p>
+          </button>
+        </a>
       </div>
 
       {/* Hamburger for small screens */}
-      <div className="absolute top-5 right-5 md:hidden">
+      <div className="absolute top-5 right-5 lg:hidden">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="size-8 flex items-center justify-center rounded-full cursor-pointer"
@@ -53,7 +76,7 @@ export default function NavBar() {
 
         {/* Dropdown menu */}
         {menuOpen && (
-          <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-800 rounded-md shadow-lg p-2 flex flex-col items-start z-50">
+          <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-800 text-gray-800 dark:text-white rounded-md shadow-lg p-2 flex flex-col items-start z-50">
             <SocialIcons isDropdown />
           </div>
         )}
@@ -62,7 +85,7 @@ export default function NavBar() {
   );
 }
 
-function SocialIcons({ isDropdown }) {
+function SocialIcons({ isDropdown, isOverlayOpen }) {
   const linkClass =
     "flex items-center gap-2 p-2 w-full hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md transition";
   const iconClass =
@@ -70,6 +93,24 @@ function SocialIcons({ isDropdown }) {
 
   return (
     <>
+      {isDropdown && (
+        <Link
+          to="/league-impostor"
+          aria-label="Games"
+          className={linkClass}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            className={iconClass}
+          >
+            <path d="M11.5 6.027a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm-6.5-3h1v1h1v1h-1v1h-1v-1h-1v-1h1v-1z"/>
+            <path d="M3.051 3.26a.5.5 0 0 1 .354-.613l1.932-.518a.5.5 0 0 1 .62.39c.655-.079 1.35-.117 2.043-.117.72 0 1.443.041 2.12.126a.5.5 0 0 1 .622-.399l1.932.518a.5.5 0 0 1 .306.729c.14.09.266.19.373.297.408.408.78 1.05 1.095 1.772.32.733.599 1.591.805 2.466.206.875.34 1.78.364 2.606.024.816-.059 1.602-.328 2.21a1.42 1.42 0 0 1-1.445.83c-.636-.067-1.115-.394-1.513-.773-.245-.232-.496-.526-.739-.808-.126-.148-.25-.292-.368-.423-.728-.804-1.597-1.527-3.224-1.527-1.627 0-2.496.723-3.224 1.527-.119.131-.242.275-.368.423-.243.282-.494.575-.739.808-.398.38-.877.706-1.513.773a1.42 1.42 0 0 1-1.445-.83c-.27-.608-.352-1.395-.329-2.21.024-.826.16-1.73.365-2.606.206-.875.486-1.733.805-2.466.315-.722.687-1.364 1.094-1.772a2.34 2.34 0 0 1 .433-.335.504.504 0 0 1-.028-.079z"/>
+          </svg>
+          <span>Games</span>
+        </Link>
+      )}
+      
       <a
         href="https://www.linkedin.com/in/quan-nguyen-127650221/"
         target="_blank"
@@ -103,8 +144,8 @@ function SocialIcons({ isDropdown }) {
         </svg>
         {isDropdown && <span>GitHub</span>}
       </a>
-      <a href={Resume} download="QuanResume" className="md:hidden mt-0.5">
-        <button className="py-3 px-4 top-5.5 flex gap-4 right-1/11 text-black dark:text-white dark:shadow-gray-500 hover:scale-105 active:scale-90 duration-300 rounded-xl shadow-lg inset-ring-2 cursor-pointer">
+      <a href={Resume} download="QuanResume" className="lg:hidden mt-0.5">
+        <button className={`py-3 px-4 top-5.5 flex gap-4 right-1/11 dark:shadow-gray-500 hover:scale-105 active:scale-90 duration-300 rounded-xl shadow-lg inset-ring-2 cursor-pointer ${isOverlayOpen ? 'text-white border border-white bg-transparent' : 'text-black dark:text-white'}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

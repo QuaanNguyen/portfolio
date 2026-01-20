@@ -16,7 +16,8 @@ A clean, responsive portfolio website with designed inspired by [Apple](https://
 - **Framework:** [React 19](https://react.dev/blog/2024/12/05/react-19)
 - **Language:** [JavaScript (ES6+)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - **Styling:** [TailwindCSS 4.1](https://tailwindcss.com/docs/installation/using-vite)
-- **Hosting:** Vercel / GitHub Pages
+- **Database** [PostgreSQL 15.1](https://www.postgresql.org/docs/15/index.html)
+- **Hosting:** Vercel / GitHub Pages / Supabase
 
 ---
 

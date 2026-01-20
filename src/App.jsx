@@ -1,10 +1,15 @@
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import RadialBackground from "./components/RadialBackground";
 import Copyright from "./components/Copyright";
 import MainView from "./components/MainView";
+import LeagueImpostor from "./components/LeagueImpostor";
 
 function App() {
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
   return (
     <>
       <div className="relative w-screen min-h-screen overflow-x-hidden lg:overflow-hidden bg-gray-100 dark:bg-neutral-900 transition-colors">
@@ -48,8 +53,14 @@ function App() {
           via="via-cyan-400"
           to="to-teal-200"
         />
-        <NavBar />
-        <MainView />
+        <NavBar isOverlayOpen={isOverlayOpen} />
+        <Routes>
+          <Route path="/" element={<MainView />} />
+          <Route
+            path="/league-impostor"
+            element={<LeagueImpostor setIsOverlayOpen={setIsOverlayOpen} />}
+          />
+        </Routes>
         <div className="hidden lg:block">
           <Copyright />
         </div>
