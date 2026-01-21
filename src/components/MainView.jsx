@@ -12,7 +12,7 @@ import OpenAILogo from "../assets/tech/openai.svg";
 import SupabaseLogo from "../assets/tech/supabase.svg";
 import CLogo from "../assets/tech/c.svg";
 import CppLogo from "../assets/tech/c-plusplus.svg";
-import CSharpLogo from "../assets/tech/c-sharp.png";
+import CSharpLogo from "../assets/tech/c-sharp.svg";
 import AwsLogo from "../assets/tech/aws.svg";
 import AzureLogo from "../assets/tech/azure.svg";
 
@@ -96,7 +96,6 @@ export default function MainView() {
   const [activeTab, setActiveTab] = useState("languages");
   const [fadePhase, setFadePhase] = useState("in"); // "in" | "out"
   const fadeTimerRef = useRef(null);
-  const isUnmountedRef = useRef(false);
 
   const activeItems = TECH_STACK[activeTab] ?? TECH_STACK[TECH_KEYS[0]] ?? [];
 
@@ -109,7 +108,6 @@ export default function MainView() {
 
   useEffect(() => {
     return () => {
-      isUnmountedRef.current = true;
       if (fadeTimerRef.current) clearTimeout(fadeTimerRef.current);
     };
   }, []);
@@ -121,7 +119,6 @@ export default function MainView() {
 
     setFadePhase("out");
     fadeTimerRef.current = setTimeout(() => {
-      if (isUnmountedRef.current) return;
       setActiveTab(normalizedNextTab);
       setFadePhase("in");
     }, 220);
@@ -282,10 +279,10 @@ export default function MainView() {
 
           {/* Tech Stack */}
           <div
-            className={`overflow-hidden order-5 lg:row-start-3 lg:col-start-3 ${sectionStyle}`}
+            className={`overflow-hidden order-5 lg:row-start-3 lg:col-start-3 ${sectionStyle} h-[400px] lg:h-[450px]`}
           >
-            <div className="w-full flex flex-col gap-4">
-              <div className="w-full flex flex-wrap gap-2 items-center justify-center rounded-full border border-white/15 bg-white/10 dark:bg-white/5 backdrop-blur-md px-2 py-2">
+            <div className="w-full flex flex-col gap-4 h-full">
+              <div className="w-full flex flex-wrap gap-2 items-center justify-center rounded-full border-2 border-white/40 dark:border-white/30 bg-white/10 dark:bg-white/5 backdrop-blur-md px-2 py-2 flex-shrink-0">
                 {TABS.map((tab) => {
                   const isActive = tab.key === activeTab;
                   return (
@@ -294,7 +291,7 @@ export default function MainView() {
                       type="button"
                       onClick={() => handleTabClick(tab.key)}
                       className={[
-                        "px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 select-none",
+                        "px-3 py-1.5 rounded-full text-base font-bold transition-all duration-200 select-none",
                         isActive
                           ? "bg-white/25 dark:bg-white/15 border border-white/25 shadow-sm ring-1 ring-white/15"
                           : "bg-transparent border border-transparent hover:bg-white/15 dark:hover:bg-white/10",
@@ -308,7 +305,7 @@ export default function MainView() {
 
               <div
                 className={[
-                  "w-full grid grid-flow-row grid-cols-3 sm:grid-cols-4 justify-items-center gap-4 transition-opacity duration-200",
+                  "w-full grid grid-flow-row grid-cols-3 sm:grid-cols-4 justify-items-center gap-2 transition-opacity duration-200 flex-1 overflow-y-auto",
                   fadePhase === "out" ? "opacity-0" : "opacity-100",
                 ].join(" ")}
               >
@@ -325,7 +322,7 @@ export default function MainView() {
                       loading="lazy"
                       draggable="false"
                     />
-                    <div className="text-xs text-center text-gray-700 dark:text-gray-300">
+                    <div className="text-sm font-medium text-center text-gray-700 dark:text-gray-300">
                       {item.label}
                     </div>
                   </div>

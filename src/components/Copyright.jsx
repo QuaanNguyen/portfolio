@@ -1,7 +1,7 @@
 export default function Copyright() {
   const currentYear = new Date().getFullYear();
   return (
-    <div className="fixed absolute bottom-1 left-1/2 -translate-x-1/2 text-center text-base text-gray-600 dark:text-gray-100 transition-colors select-none z-50">
+    <div className="lg:fixed absolute bottom-1 left-1/2 -translate-x-1/2 text-center text-base text-gray-600 dark:text-gray-100 transition-colors select-none z-50">
       <p className="mb-1 break-normal">
         Made with React.js and Tailwind. Give me a star{" "}
         <a
