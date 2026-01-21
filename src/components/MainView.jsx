@@ -10,6 +10,11 @@ import OllamaLogo from "../assets/tech/ollama.svg";
 import HuggingFaceLogo from "../assets/tech/huggingface.svg";
 import OpenAILogo from "../assets/tech/openai.svg";
 import SupabaseLogo from "../assets/tech/supabase.svg";
+import CLogo from "../assets/tech/c.svg";
+import CppLogo from "../assets/tech/c-plusplus.svg";
+import CSharpLogo from "../assets/tech/c-sharp.png";
+import AwsLogo from "../assets/tech/aws.svg";
+import AzureLogo from "../assets/tech/azure.svg";
 
 export default function MainView() {
   const sectionStyle =
@@ -45,9 +50,9 @@ export default function MainView() {
           label: "TypeScript",
           src: "https://cdn.simpleicons.org/typescript/3178C6",
         },
-        { label: "C#", src: "https://cdn.simpleicons.org/csharp/512BD4" },
-        { label: "C", src: "https://cdn.simpleicons.org/c/A8B9CC" },
-        { label: "C++", src: "https://cdn.simpleicons.org/cplusplus/00599C" },
+        { label: "C#", src: CSharpLogo },
+        { label: "C", src: CLogo },
+        { label: "C++", src: CppLogo },
       ],
       frameworks: [
         { label: "React", src: "https://cdn.simpleicons.org/react/61DAFB" },
@@ -75,11 +80,11 @@ export default function MainView() {
       clouds: [
         {
           label: "AWS",
-          src: "https://cdn.simpleicons.org/amazonwebservices/232F3E",
+          src: AwsLogo,
         },
         {
           label: "Microsoft Azure",
-          src: "https://cdn.simpleicons.org/microsoftazure/0078D4",
+          src: AzureLogo,
         },
         { label: "Vercel", src: "https://cdn.simpleicons.org/vercel/000000" },
         { label: "Supabase", src: SupabaseLogo },
