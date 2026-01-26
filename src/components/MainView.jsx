@@ -136,24 +136,19 @@ export default function MainView() {
             <div className="max-w-8/9 leading-relaxed overflow-y-auto">
               <h2 className="text-2xl font-bold mb-4 text-left">about me</h2>
               <p className="mb-4">
-                I am currently finishing my{" "}
-                <a className="font-semibold">
-                  Master's in Computer Engineering
-                </a>
-                , looking to jump into the tech industry.
+                I’m a first-year <a className="font-semibold">Computer Engineering Master’s student</a> and <a className="font-semibold">a builder</a> at heart.
+                With <a className="font-semibold">3+ years of experience</a> working with everyone from <a className="font-semibold">Fortune 200s</a> to <a className="font-semibold">local startups</a>,
+                I’ve learned that the best solutions come from a deep understanding of the "baseline",
+                <a className="font-semibold"> the friction points</a> that slow people down.
                 <br />
                 <br />
-                With over <a className="font-bold">3 YOE</a> in building
-                solutions for stakeholders, focused on{" "}
-                <a className="font-semibold">optimizing system</a>. My mission
-                is to build impactful products and thrive for innovation,
-                enabling automation and accessibility for all.
+                <a className="font-semibold">Guitar is my instrument, automation is my jam.</a> During free time, I look for redundant tasks and build tools
+                to kill them. My latest project is a Chrome extension for loan officers that uses intelligent
+                parsing to automate loan estimate forms (Open-sourced for <a className="italic">free</a> on GitHub).
                 <br />
                 <br />
-                In order to achieve that, I take great care in understanding the
-                problems and baselines, especially{" "}
-                <a className="font-semibold">current limitations</a> to produce
-                a novel solution.
+                <a className="font-semibold">Currently looking for SWE/AI Engineer roles in Texas.</a> If you’re dealing with a manual process
+                that’s driving you crazy, I might just build the solution.
               </p>
 
               <h2 className="text-2xl font-bold mt-4 mb-4 text-left">
