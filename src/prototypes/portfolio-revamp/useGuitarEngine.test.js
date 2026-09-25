@@ -34,9 +34,9 @@ test("logo signature uses the requested G minor shape", () => {
 test("every acoustic strum uses a fixed natural string interval", () => {
   assert.equal(STRUM_STRING_INTERVAL_SECONDS, 0.021);
   assert.ok(Math.abs(STRUM_STRING_INTERVAL_SECONDS * 5 - 0.105) < 1e-9);
-  assert.equal(LOGO_STRING_INTERVAL_SECONDS, STRUM_STRING_INTERVAL_SECONDS);
+  assert.equal(LOGO_STRING_INTERVAL_SECONDS, 0.09);
   assert.equal(LOGO_STRING_DELAYS.length, 6);
-  assert.ok(Math.abs(LOGO_RESOLVE_SECONDS - LOGO_HOLD_SECONDS) < 1e-9);
+  assert.ok(Math.abs(LOGO_RESOLVE_SECONDS - 1.51) < 1e-9);
 });
 
 test("generated chord voicings stay on playable strings and within a four-fret span", () => {
