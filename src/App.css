@@ -8,6 +8,7 @@ body,
 #root {
   height: 100%;
   overflow: hidden;
+  background-color: #f1f0ef;
 }
 
 @custom-variant dark (&:is(.dark *));

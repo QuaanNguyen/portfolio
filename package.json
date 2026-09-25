@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prototype": "vite --open /prototype/portfolio-revamp?variant=A&page=home",
+    "test:prototype": "node --test src/prototypes/portfolio-revamp/musicModel.test.js src/prototypes/portfolio-revamp/useGuitarEngine.test.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -13,6 +15,7 @@
     "@heroicons/react": "^2.2.0",
     "@supabase/supabase-js": "^2.50.0",
     "@tailwindcss/vite": "^4.1.8",
+    "motion": "^13.4.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.11.0",

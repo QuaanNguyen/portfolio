@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
@@ -7,7 +7,11 @@ import Copyright from "./components/Copyright";
 import MainView from "./components/MainView";
 import LeagueImpostor from "./components/LeagueImpostor";
 
-function App() {
+const PortfolioRevampPrototype = lazy(() =>
+  import("./prototypes/portfolio-revamp/PortfolioRevampPrototype.jsx")
+);
+
+function LegacyPortfolio() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   return (
@@ -66,6 +70,31 @@ function App() {
         </div>
       </div>
     </>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route
+        path="/prototype/portfolio-revamp"
+        element={
+          <Suspense
+            fallback={
+              <div
+                className="flex min-h-screen w-screen items-center justify-center bg-gray-100 text-sm text-gray-700"
+                role="status"
+              >
+                Loading prototype
+              </div>
+            }
+          >
+            <PortfolioRevampPrototype />
+          </Suspense>
+        }
+      />
+      <Route path="*" element={<LegacyPortfolio />} />
+    </Routes>
   );
 }
 

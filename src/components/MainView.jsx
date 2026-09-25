@@ -101,7 +101,6 @@ export default function MainView() {
 
   useEffect(() => {
     if (!TECH_STACK[activeTab]) {
-      // eslint-disable-next-line no-console
       console.warn("Invalid tech stack tab key:", JSON.stringify(activeTab));
     }
   }, [activeTab, TECH_STACK]);
