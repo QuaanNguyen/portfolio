@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   animate,
   motion as Motion,
@@ -71,7 +71,7 @@ const ASSETS = {
   },
 };
 
-export const DEFAULT_CHARACTER_ANIMATIONS = {
+const DEFAULT_CHARACTER_ANIMATIONS = {
   q: {
     progressInput: [0, 0.46, 1],
     scaleInput: [0, 0.18, 0.46, 1],
@@ -143,7 +143,7 @@ const COLORS = {
 const SCALES = {
   compact: 0.25,
   regular: 0.44,
-  hero: 0.69,
+  hero: 0.621,
 };
 
 function getAssetStyle(asset, color) {
@@ -326,97 +326,59 @@ export default function PrototypeLogo({
   compact = false,
   size,
   characterAnimations = {},
-  onReplay,
-  onReverse,
-  onStop,
+  autoPlay = false,
+  onPlay,
   onResolve,
 }) {
   const shouldReduceMotion = useReducedMotion();
   const progress = useMotionValue(0);
   const animationRef = useRef(null);
-  const strumTimerRef = useRef(null);
-  const strumTriggeredRef = useRef(false);
+  const onPlayRef = useRef(onPlay);
+  const onResolveRef = useRef(onResolve);
   const [resolved, setResolved] = useState(false);
   const color = COLORS[tone] ?? tone;
   const scale = SCALES[size ?? (compact ? "compact" : "regular")];
+  onPlayRef.current = onPlay;
+  onResolveRef.current = onResolve;
 
-  const moveTo = (target) => {
+  const play = useCallback(() => {
     animationRef.current?.stop();
-    if (strumTimerRef.current) clearTimeout(strumTimerRef.current);
-
-    if (target === 1) {
-      strumTriggeredRef.current = false;
-      onReplay?.();
-      strumTimerRef.current = setTimeout(() => {
-        strumTriggeredRef.current = true;
-      }, LOGO_STRING_START_SECONDS * 1000);
-    }
+    Promise.resolve(onPlayRef.current?.()).catch(() => undefined);
 
     const current = progress.get();
 
     if (shouldReduceMotion) {
-      progress.set(target);
-      if (target === 1) {
-        setResolved(true);
-        onResolve?.();
-      } else {
-        setResolved(false);
-      }
+      progress.set(1);
+      setResolved(true);
+      onResolveRef.current?.();
       return;
     }
 
-    const duration = target === 1
-      ? Math.max(0.12, (1 - current) * LOGO_HOLD_SECONDS)
-      : Math.max(0.15, current * 1.35);
+    const duration = Math.max(0.12, (1 - current) * LOGO_HOLD_SECONDS);
 
-    animationRef.current = animate(progress, target, {
+    animationRef.current = animate(progress, 1, {
       duration,
-      ease: target === 1 ? [0.34, 0.02, 0.18, 1] : [0.45, 0, 0.72, 1],
+      ease: [0.34, 0.02, 0.18, 1],
       onComplete: () => {
-        if (target === 1) {
-          setResolved(true);
-          onResolve?.();
-        } else {
-          setResolved(false);
-        }
+        setResolved(true);
+        onResolveRef.current?.();
       },
     });
-  };
+  }, [progress, shouldReduceMotion]);
 
-  const reverse = () => {
-    if (strumTimerRef.current) clearTimeout(strumTimerRef.current);
-    const wasTriggered =
-      resolved ||
-      strumTriggeredRef.current ||
-      progress.get() >= (LOGO_STRING_START_SECONDS / LOGO_HOLD_SECONDS) * 0.85;
-
-    if (wasTriggered) {
-      onReverse?.();
-    } else {
-      onStop?.();
-    }
-    strumTriggeredRef.current = false;
-    moveTo(0);
-  };
+  useEffect(() => {
+    if (autoPlay) play();
+  }, [autoPlay, play]);
 
   useEffect(() => () => {
     animationRef.current?.stop();
-    if (strumTimerRef.current) clearTimeout(strumTimerRef.current);
   }, []);
 
   return (
-    <Motion.button
-      type="button"
+    <Motion.div
       className={`prototype-logo size-${size ?? (compact ? "compact" : "regular")} ${resolved ? "is-resolved" : ""}`}
+      role="img"
       aria-label="Quan Nguyen logo"
-      onPointerEnter={() => moveTo(1)}
-      onPointerLeave={reverse}
-      onPointerDown={() => {
-        onReplay?.();
-        moveTo(1);
-      }}
-      onFocus={() => moveTo(1)}
-      onBlur={reverse}
       style={{
         position: "relative",
         display: "block",
@@ -426,8 +388,6 @@ export default function PrototypeLogo({
         padding: 0,
         border: 0,
         background: "transparent",
-        cursor: "pointer",
-        touchAction: "manipulation",
       }}
     >
       <span
@@ -464,6 +424,6 @@ export default function PrototypeLogo({
           />
         ))}
       </span>
-    </Motion.button>
+    </Motion.div>
   );
 }

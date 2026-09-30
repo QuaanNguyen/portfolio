@@ -5,11 +5,12 @@ import ChordStudio from "./ChordStudio";
 import HomeVariants from "./HomeVariants";
 import useGuitarEngine from "./useGuitarEngine";
 import "./portfolio-revamp.css";
+import "./portfolio-home.css";
 
 export default function PortfolioRevampPrototype() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") === "sound" ? "sound" : "home";
-  const { playLogoSignature, playReverseSignature, stopSequence } = useGuitarEngine();
+  const { playLogoSignature, prepareLogoSignature, stopSequence } = useGuitarEngine();
 
   const updateParams = useCallback((changes) => {
     const nextParams = new URLSearchParams(searchParams);
@@ -28,18 +29,16 @@ export default function PortfolioRevampPrototype() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="portfolio-prototype variant-c" data-variant="C">
-        <div className="prototype-badge">throwaway prototype · not production</div>
         <AnimatePresence mode="sync" initial={false}>
           {page === "home" ? (
             <Motion.div className="prototype-page" key="home" exit={{ opacity: 0 }}>
               <HomeVariants
+                onPrepareLogo={prepareLogoSignature}
+                onPlayLogo={playLogoSignature}
                 onOpenStudio={() => {
                   stopSequence();
                   updateParams({ page: "sound" });
                 }}
-                onReplayLogo={playLogoSignature}
-                onReverseLogo={playReverseSignature}
-                onStopLogo={stopSequence}
               />
             </Motion.div>
           ) : (

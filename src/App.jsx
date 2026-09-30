@@ -71,16 +71,7 @@ function App() {
       <Route
         path="/prototype/portfolio-revamp"
         element={
-          <Suspense
-            fallback={
-              <div
-                className="flex min-h-screen w-screen items-center justify-center bg-gray-100 text-sm text-gray-700"
-                role="status"
-              >
-                Loading prototype
-              </div>
-            }
-          >
+          <Suspense fallback={null}>
             <PortfolioRevampPrototype />
           </Suspense>
         }

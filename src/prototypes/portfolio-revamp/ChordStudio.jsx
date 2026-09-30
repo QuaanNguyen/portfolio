@@ -257,7 +257,7 @@ export default function ChordStudio({ variant, onBack }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileLibraryOpen, setMobileLibraryOpen] = useState(false);
   const [narrowViewport, setNarrowViewport] = useState(false);
-  const { audioReady, playLogoSignature, playSequence, sampleMode, stopSequence } = useGuitarEngine();
+  const { audioReady, playSequence, sampleMode, stopSequence } = useGuitarEngine();
   const accent = variant === "B" ? "#4cb05e" : variant === "C" ? "#0d7e70" : "#176bff";
 
   useEffect(() => {
@@ -388,7 +388,7 @@ export default function ChordStudio({ variant, onBack }) {
   const sharedHeader = (
     <>
       <button type="button" className="studio-back" onClick={onBack}>← home</button>
-      <PrototypeLogo compact tone={variant === "C" ? "ink" : variant === "B" ? "green" : "blue"} onReplay={playLogoSignature} />
+      <PrototypeLogo compact tone={variant === "C" ? "ink" : variant === "B" ? "green" : "blue"} />
       <div className="studio-title">
         <span>experiment 01</span>
         <strong>harmonic field</strong>

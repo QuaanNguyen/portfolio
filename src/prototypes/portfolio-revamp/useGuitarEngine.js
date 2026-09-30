@@ -444,19 +444,32 @@ export default function useGuitarEngine() {
   const playbackRef = useRef(null);
   const liveVoicesRef = useRef(Array(6).fill(null));
   const liveOccurrenceRef = useRef(0);
+  const logoPreparationRef = useRef(null);
   const [audioReady, setAudioReady] = useState(false);
   const [sampleMode, setSampleMode] = useState("recorded guitar sleeps");
 
-  const ensureContext = useCallback(async () => {
+  const getContext = useCallback(() => {
     if (!contextRef.current) {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextClass) return null;
       contextRef.current = new AudioContextClass();
       graphRef.current = createAudioGraph(contextRef.current);
     }
-    if (contextRef.current.state === "suspended") await contextRef.current.resume();
     return contextRef.current;
   }, []);
+
+  const ensureContext = useCallback(async () => {
+    const context = getContext();
+    if (!context) return null;
+    if (context.state === "suspended") {
+      try {
+        await context.resume();
+      } catch {
+        return context;
+      }
+    }
+    return context;
+  }, [getContext]);
 
   const cancelPlayback = useCallback(() => {
     playbackTokenRef.current += 1;
@@ -596,6 +609,33 @@ export default function useGuitarEngine() {
     cancelPlayback();
   }, [cancelPlayback]);
 
+  const prepareLogoSignature = useCallback(async () => {
+    if (logoPreparationRef.current) return logoPreparationRef.current;
+    const context = getContext();
+    if (!context) return false;
+
+    logoPreparationRef.current = (async () => {
+      try {
+        const manifest = await loadManifest();
+        await prepareVoicings(
+          context,
+          [LOGO_G_MINOR_VOICING],
+          [0],
+          manifest,
+          sampleCacheRef.current,
+        );
+        setSampleMode(manifest.mode);
+        setAudioReady(true);
+        return true;
+      } catch {
+        setSampleMode("recorded guitar unavailable");
+        setAudioReady(false);
+        return false;
+      }
+    })();
+    return logoPreparationRef.current;
+  }, [getContext]);
+
   const playLogoSignature = useCallback(async (options = {}) => {
     const callbacks = typeof options === "function" ? { onBeat: options } : options;
     cancelPlayback();
@@ -673,75 +713,6 @@ export default function useGuitarEngine() {
     }
   }, [cancelPlayback, ensureContext]);
 
-  const playReverseSignature = useCallback(async (options = {}) => {
-    const callbacks = typeof options === "function" ? { onBeat: options } : options;
-    cancelPlayback();
-    const token = playbackTokenRef.current;
-    const context = await ensureContext();
-    if (!context || !graphRef.current || playbackTokenRef.current !== token) return null;
-    if (context.state !== "running") return null;
-
-    try {
-      const manifest = await loadManifest();
-      const prepared = await prepareVoicings(
-        context,
-        [LOGO_G_MINOR_VOICING],
-        [0],
-        manifest,
-        sampleCacheRef.current,
-      );
-      if (playbackTokenRef.current !== token || context.state !== "running") return null;
-
-      setSampleMode(manifest.mode);
-      setAudioReady(true);
-      // Give 45ms scheduling headroom to ensure AudioParam ramp is safely in the future
-      const startTime = context.currentTime + 0.045;
-      const recordings = prepared.recordings[0];
-      const voices = [];
-      const timers = [];
-
-      // Reversed strings: from high e (stringIndex 5) down to Bass E (stringIndex 0)
-      const reversedIndices = [5, 4, 3, 2, 1, 0];
-
-      reversedIndices.forEach((stringIndex, orderIndex) => {
-        const when = startTime + orderIndex * LOGO_STRING_INTERVAL_SECONDS;
-        const recording = recordings[stringIndex];
-        const buffer = prepared.buffers.get(recording.url);
-        if (!buffer || !recording) return;
-
-        const voice = scheduleRecordedNote(
-          context,
-          graphRef.current.input,
-          buffer,
-          recording,
-          stringIndex,
-          when,
-          0.50 - orderIndex * 0.02,
-        );
-        voices.push(voice);
-        timers.push(window.setTimeout(() => {
-          if (playbackTokenRef.current === token) callbacks.onBeat?.(stringIndex);
-        }, Math.max(0, (when - context.currentTime) * 1000)));
-      });
-
-      const completionTime = voices.reduce((end, voice) => Math.max(end, voice.endTime), startTime);
-      timers.push(window.setTimeout(() => {
-        if (playbackTokenRef.current !== token) return;
-        playbackRef.current = null;
-      }, Math.max(0, (completionTime + 0.06 - context.currentTime) * 1000)));
-      playbackRef.current = { token, timers, voices };
-      return {
-        durationMs: Math.round((completionTime + 0.06 - startTime) * 1000),
-      };
-    } catch {
-      if (playbackTokenRef.current === token) {
-        setSampleMode("recorded guitar unavailable");
-        setAudioReady(false);
-      }
-      return null;
-    }
-  }, [cancelPlayback, ensureContext]);
-
   // Unlock AudioContext on first user interaction anywhere on the window
   useEffect(() => {
     const unlock = () => {
@@ -785,8 +756,8 @@ export default function useGuitarEngine() {
   return {
     audioReady,
     playLogoSignature,
-    playReverseSignature,
     playSequence,
+    prepareLogoSignature,
     sampleMode,
     stopSequence,
     strum,
