@@ -10,7 +10,7 @@ import "./portfolio-home.css";
 export default function PortfolioRevampPrototype() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") === "sound" ? "sound" : "home";
-  const { playLogoSignature, prepareLogoSignature, stopSequence } = useGuitarEngine();
+  const { playLogoSignature, prepareLogoSignature } = useGuitarEngine();
 
   const updateParams = useCallback((changes) => {
     const nextParams = new URLSearchParams(searchParams);
@@ -35,10 +35,6 @@ export default function PortfolioRevampPrototype() {
               <HomeVariants
                 onPrepareLogo={prepareLogoSignature}
                 onPlayLogo={playLogoSignature}
-                onOpenStudio={() => {
-                  stopSequence();
-                  updateParams({ page: "sound" });
-                }}
               />
             </Motion.div>
           ) : (

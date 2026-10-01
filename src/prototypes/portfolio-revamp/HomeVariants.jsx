@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { AnimatePresence, motion as Motion } from "motion/react";
 import IdentityHoverList from "./IdentityHoverList";
 import PortfolioLoader from "./PortfolioLoader";
+import PlaygroundUnderConstruction from "./PlaygroundUnderConstruction";
 import PrototypeLogo from "./PrototypeLogo";
 import engineerImage from "./assets/identity/engineer.jpg";
 import overlanderImage from "./assets/identity/overlander.jpg";
@@ -56,7 +57,7 @@ const HOME_ASSETS = [...new Set([
   ...EXPERIENCES.map((experience) => experience.logo),
 ])];
 
-export default function HomeVariants({ onOpenStudio, onPrepareLogo, onPlayLogo }) {
+export default function HomeVariants({ onPrepareLogo, onPlayLogo }) {
   const [introStarted, setIntroStarted] = useState(false);
   const [revealed, setRevealed] = useState(false);
   const [openEducation, setOpenEducation] = useState("bachelors");
@@ -115,7 +116,7 @@ export default function HomeVariants({ onOpenStudio, onPrepareLogo, onPlayLogo }
                 <div className="identity-contact-grid">
                   <nav aria-label="Social links">
                     <a href="https://github.com/QuaanNguyen" target="_blank" rel="noreferrer">github ↗</a>
-                    <a href="https://www.linkedin.com/in/quan-nguyen-127650221/" target="_blank" rel="noreferrer">linkedin ↗</a>
+                    <a href="https://www.linkedin.com/in/quan-a-nguyen/" target="_blank" rel="noreferrer">linkedin ↗</a>
                   </nav>
                   <div className="identity-direct-contact">
                     <span>quannguyenanhnaq@gmail.com</span>
@@ -168,7 +169,7 @@ export default function HomeVariants({ onOpenStudio, onPrepareLogo, onPlayLogo }
                 <section className="portfolio-section experience-section" aria-labelledby="experience-title">
                   <header className="section-heading">
                     <h2 id="experience-title">experiences</h2>
-                    <p>My growth welcomed many opportunities, from West to East coast</p>
+                    <p>my growth welcomed many opportunities, from West to East coast</p>
                   </header>
 
                   <div className="experience-grid">
@@ -227,13 +228,7 @@ export default function HomeVariants({ onOpenStudio, onPrepareLogo, onPlayLogo }
                 </section>
               </div>
 
-              <section className="playground-section" aria-labelledby="playground-title">
-                <h2 id="playground-title">playground</h2>
-                <Motion.button type="button" onClick={onOpenStudio} whileTap={{ scale: 0.97 }}>
-                  enter site
-                  <span aria-hidden="true">↗</span>
-                </Motion.button>
-              </section>
+              <PlaygroundUnderConstruction />
             </div>
           </Motion.div>
         )}

@@ -112,7 +112,7 @@ function SocialIcons({ isDropdown, isOverlayOpen }) {
       )}
       
       <a
-        href="https://www.linkedin.com/in/quan-nguyen-127650221/"
+        href="https://www.linkedin.com/in/quan-a-nguyen/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
