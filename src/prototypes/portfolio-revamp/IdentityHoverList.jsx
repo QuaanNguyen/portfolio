@@ -131,6 +131,8 @@ export default function IdentityHoverList({ identities }) {
               className="identity-mobile-image"
               src={identity.image}
               alt={identity.alt}
+              decoding="async"
+              loading={index === 0 ? "eager" : "lazy"}
             />
           </div>
         ))}
@@ -146,6 +148,8 @@ export default function IdentityHoverList({ identities }) {
             className="identity-preview-image"
             src={identity.image}
             alt=""
+            decoding="async"
+            loading="lazy"
             key={identity.label}
           />
         ))}

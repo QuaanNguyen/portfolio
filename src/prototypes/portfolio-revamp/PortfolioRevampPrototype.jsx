@@ -33,6 +33,7 @@ export default function PortfolioRevampPrototype() {
           {page === "home" ? (
             <Motion.div className="prototype-page" key="home" exit={{ opacity: 0 }}>
               <HomeVariants
+                intro="showcase"
                 onPrepareLogo={prepareLogoSignature}
                 onPlayLogo={playLogoSignature}
               />

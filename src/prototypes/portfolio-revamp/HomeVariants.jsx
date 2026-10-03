@@ -1,18 +1,19 @@
-import { useCallback, useState } from "react";
+import { lazy, Suspense, useCallback, useState } from "react";
 import { AnimatePresence, motion as Motion } from "motion/react";
 import IdentityHoverList from "./IdentityHoverList";
 import PortfolioLoader from "./PortfolioLoader";
-import PlaygroundUnderConstruction from "./PlaygroundUnderConstruction";
 import PrototypeLogo from "./PrototypeLogo";
-import engineerImage from "./assets/identity/engineer.jpg";
-import overlanderImage from "./assets/identity/overlander.jpg";
-import chomperImage from "./assets/identity/chomper.jpg";
-import foodieImage from "./assets/identity/foodie.jpg";
+import engineerImage from "./assets/identity/engineer.webp";
+import overlanderImage from "./assets/identity/overlander.webp";
+import chomperImage from "./assets/identity/chomper.webp";
+import foodieImage from "./assets/identity/foodie.webp";
 import asuLogo from "./assets/organizations/asu.png";
 import awsLogo from "./assets/organizations/aws.svg";
 import crownCastleLogo from "./assets/organizations/crown-castle.svg";
 import johnHancockLogo from "./assets/organizations/john-hancock.svg";
-import mcaoLogo from "./assets/organizations/mcao.png";
+import mcaoLogo from "./assets/organizations/mcao.webp";
+
+const PlaygroundUnderConstruction = lazy(() => import("./PlaygroundUnderConstruction"));
 
 const IDENTITIES = [
   { label: "engineer", image: engineerImage, alt: "A laptop open in the ASU Next Lab" },
@@ -57,9 +58,10 @@ const HOME_ASSETS = [...new Set([
   ...EXPERIENCES.map((experience) => experience.logo),
 ])];
 
-export default function HomeVariants({ onPrepareLogo, onPlayLogo }) {
-  const [introStarted, setIntroStarted] = useState(false);
-  const [revealed, setRevealed] = useState(false);
+export default function HomeVariants({ intro = "showcase", onPrepareLogo, onPlayLogo }) {
+  const showcaseIntro = intro === "showcase";
+  const [introStarted, setIntroStarted] = useState(!showcaseIntro);
+  const [revealed, setRevealed] = useState(!showcaseIntro);
   const [openEducation, setOpenEducation] = useState("bachelors");
   const [activeExperience, setActiveExperience] = useState("john-hancock-swe");
 
@@ -77,7 +79,7 @@ export default function HomeVariants({ onPrepareLogo, onPlayLogo }) {
       transition={{ duration: 0.35 }}
     >
       <AnimatePresence>
-        {!introStarted && (
+        {showcaseIntro && !introStarted && (
           <PortfolioLoader
             assets={HOME_ASSETS}
             onComplete={finishLoading}
@@ -228,7 +230,9 @@ export default function HomeVariants({ onPrepareLogo, onPlayLogo }) {
                 </section>
               </div>
 
-              <PlaygroundUnderConstruction />
+              <Suspense fallback={<div className="playground-section" aria-hidden="true" />}>
+                <PlaygroundUnderConstruction />
+              </Suspense>
             </div>
           </Motion.div>
         )}
