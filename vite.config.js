@@ -15,7 +15,7 @@ function releaseArtifacts() {
     },
     async closeBundle() {
       await Promise.all([
-        rm(resolve(outputDirectory, "audio"), { force: true, recursive: true }),
+        rm(resolve(outputDirectory, "audio/guitar-physical"), { force: true, recursive: true }),
         rm(resolve(outputDirectory, ".DS_Store"), { force: true }),
       ]);
     },

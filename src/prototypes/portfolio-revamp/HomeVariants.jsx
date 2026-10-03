@@ -58,7 +58,12 @@ const HOME_ASSETS = [...new Set([
   ...EXPERIENCES.map((experience) => experience.logo),
 ])];
 
-export default function HomeVariants({ intro = "showcase", onPrepareLogo, onPlayLogo }) {
+export default function HomeVariants({
+  intro = "showcase",
+  onActivateLogo,
+  onPrepareLogo,
+  onPlayLogo,
+}) {
   const showcaseIntro = intro === "showcase";
   const [introStarted, setIntroStarted] = useState(!showcaseIntro);
   const [revealed, setRevealed] = useState(!showcaseIntro);
@@ -81,6 +86,7 @@ export default function HomeVariants({ intro = "showcase", onPrepareLogo, onPlay
       <AnimatePresence>
         {showcaseIntro && !introStarted && (
           <PortfolioLoader
+            activateSound={onActivateLogo}
             assets={HOME_ASSETS}
             onComplete={finishLoading}
             prepareSound={onPrepareLogo}

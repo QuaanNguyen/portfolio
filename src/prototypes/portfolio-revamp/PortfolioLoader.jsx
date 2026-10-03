@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { motion as Motion } from "motion/react";
+import { AnimatePresence, motion as Motion } from "motion/react";
 
 const MINIMUM_VISIBLE_MILLISECONDS = 900;
-const COMPLETE_HOLD_MILLISECONDS = 2000;
+const COMPLETE_HOLD_MILLISECONDS = 350;
 
 function loadImage(source, onComplete) {
   return new Promise((resolve) => {
@@ -22,8 +22,15 @@ function loadImage(source, onComplete) {
   });
 }
 
-export default function PortfolioLoader({ assets, onComplete, prepareSound }) {
+export default function PortfolioLoader({
+  activateSound,
+  assets,
+  onComplete,
+  prepareSound,
+}) {
   const [progress, setProgress] = useState(0);
+  const [ready, setReady] = useState(false);
+  const [entering, setEntering] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -48,7 +55,7 @@ export default function PortfolioLoader({ assets, onComplete, prepareSound }) {
     Promise.all([...imageTasks, fontTask, soundTask, minimumTask]).then(() => {
       if (cancelled) return;
       setProgress(100);
-      completionTimer = window.setTimeout(onComplete, COMPLETE_HOLD_MILLISECONDS);
+      completionTimer = window.setTimeout(() => setReady(true), COMPLETE_HOLD_MILLISECONDS);
     });
 
     return () => {
@@ -56,16 +63,26 @@ export default function PortfolioLoader({ assets, onComplete, prepareSound }) {
       if (completionTimer) window.clearTimeout(completionTimer);
       if (minimumTimer) window.clearTimeout(minimumTimer);
     };
-  }, [assets, onComplete, prepareSound]);
+  }, [assets, prepareSound]);
+
+  const enterPortfolio = async () => {
+    if (entering) return;
+    setEntering(true);
+    try {
+      await activateSound?.();
+    } finally {
+      onComplete();
+    }
+  };
 
   return (
     <div
       className="portfolio-loader"
-      role="status"
-      aria-live="polite"
     >
       <div className="portfolio-loader-content">
-        <p>my favorite chord is G minor!</p>
+        <p role="status" aria-live="polite">
+          {ready ? "ready when you are" : "my favorite chord is G minor!"}
+        </p>
         <div
           className="portfolio-loader-track"
           role="progressbar"
@@ -79,6 +96,22 @@ export default function PortfolioLoader({ assets, onComplete, prepareSound }) {
             transition={{ duration: 0.22, ease: "easeOut" }}
           />
         </div>
+        <AnimatePresence>
+          {ready && (
+            <Motion.button
+              className="portfolio-loader-action"
+              type="button"
+              disabled={entering}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 4 }}
+              transition={{ duration: 0.24, ease: "easeOut" }}
+              onClick={enterPortfolio}
+            >
+              {entering ? "starting..." : "enter with sound"}
+            </Motion.button>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

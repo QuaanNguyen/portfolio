@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const playgroundPath = new URL("./PlaygroundUnderConstruction.jsx", import.meta.url);
 const logoPath = new URL("./PrototypeLogo.jsx", import.meta.url);
 const homeStylesPath = new URL("./portfolio-home.css", import.meta.url);
+const prototypeStylesPath = new URL("./portfolio-revamp.css", import.meta.url);
+const portfolioFontPath = new URL("./assets/fonts/hedvig-letters-sans-latin.woff2", import.meta.url);
 const indexPath = new URL("../../../index.html", import.meta.url);
 const faviconPath = new URL("../../../logo/favicon.svg", import.meta.url);
 
@@ -35,6 +37,14 @@ test("the favicon uses the blue logo mark without dot decoration", async () => {
 test("the animated logo does not render six staging dots", async () => {
   const source = await readFile(logoPath, "utf8");
   assert.doesNotMatch(source, /const DOTS|<Motion\.i|borderRadius:\s*"50%"/);
+});
+
+test("the portfolio typeface is bundled with the release", async () => {
+  const styles = await readFile(prototypeStylesPath, "utf8");
+  assert.match(styles, /@font-face/);
+  assert.match(styles, /hedvig-letters-sans-latin\.woff2/);
+  assert.doesNotMatch(styles, /fonts\.googleapis\.com/);
+  await access(portfolioFontPath);
 });
 
 test("the playground button keeps its original grid position", async () => {

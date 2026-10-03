@@ -1,0 +1,73 @@
+{
+  "source": "University of Iowa Electronic Music Studios Musical Instrument Samples, Raimundo 118 guitar, medium and fortissimo dynamic, mono physical-string recordings",
+  "permissionUrl": "https://theremin.music.uiowa.edu/MIS.html",
+  "baseUrl": "/audio/logo-guitar",
+  "samples": [
+    {
+      "stringIndex": 0,
+      "fret": 3,
+      "midi": 43,
+      "dynamic": "ff",
+      "alternateIndex": 1,
+      "file": "string-1-fret-03-ff.mp3",
+      "durationSeconds": 3.4,
+      "validationCents": -33.65,
+      "gainCompensation": 0.4553
+    },
+    {
+      "stringIndex": 1,
+      "fret": 5,
+      "midi": 50,
+      "dynamic": "mf",
+      "alternateIndex": 0,
+      "file": "string-2-fret-05-mf.mp3",
+      "durationSeconds": 3.4,
+      "validationCents": -16.08,
+      "gainCompensation": 0.8237
+    },
+    {
+      "stringIndex": 2,
+      "fret": 5,
+      "midi": 55,
+      "dynamic": "ff",
+      "alternateIndex": 1,
+      "file": "string-3-fret-05-ff.mp3",
+      "durationSeconds": 3.4,
+      "validationCents": -21.37,
+      "gainCompensation": 0.5756
+    },
+    {
+      "stringIndex": 3,
+      "fret": 3,
+      "midi": 58,
+      "dynamic": "mf",
+      "alternateIndex": 0,
+      "file": "string-4-fret-03-mf.mp3",
+      "durationSeconds": 3.4,
+      "validationCents": -11.08,
+      "gainCompensation": 0.9684
+    },
+    {
+      "stringIndex": 4,
+      "fret": 3,
+      "midi": 62,
+      "dynamic": "ff",
+      "alternateIndex": 1,
+      "file": "string-5-fret-03-ff.mp3",
+      "durationSeconds": 3.4,
+      "validationCents": -13.52,
+      "gainCompensation": 0.9521
+    },
+    {
+      "stringIndex": 5,
+      "fret": 3,
+      "midi": 67,
+      "dynamic": "mf",
+      "alternateIndex": 0,
+      "file": "string-6-fret-03-mf.mp3",
+      "durationSeconds": 3.4,
+      "validationCents": -21.48,
+      "gainCompensation": 2.0723
+    }
+  ]
+}

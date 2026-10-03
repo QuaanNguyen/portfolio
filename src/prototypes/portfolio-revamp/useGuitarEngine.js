@@ -14,8 +14,10 @@ const MAX_FRET_SPAN = 4;
 const MAX_SAMPLE_CACHE_SIZE = 72;
 const SHAPE_CACHE = new Map();
 const SAMPLE_MANIFEST_URL = "/audio/guitar-physical/manifest.json";
+const LOGO_SAMPLE_MANIFEST_URL = "/audio/logo-guitar/manifest.json";
 
 let manifestPromise;
+let logoManifestPromise;
 
 const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 const mod = (value, divisor) => ((value % divisor) + divisor) % divisor;
@@ -180,7 +182,8 @@ export function resolvePhysicalRecording(manifest, stringIndex, midi, occurrence
   if (!candidates.length) throw new Error(`Missing physical guitar sample for string ${stringIndex}, fret ${fret}`);
   const phase = mod(stringIndex * 13 + fret, candidates.length);
   const sample = candidates[mod(phase + occurrence, candidates.length)];
-  const url = sample.file.startsWith("/") ? sample.file : `/audio/guitar-physical/${sample.file}`;
+  const baseUrl = manifest.baseUrl ?? "/audio/guitar-physical";
+  const url = sample.file.startsWith("/") ? sample.file : `${baseUrl}/${sample.file}`;
   return {
     sourceMidi: sample.midi,
     url,
@@ -192,6 +195,23 @@ export function resolvePhysicalRecording(manifest, stringIndex, midi, occurrence
     fret,
     alternateIndex: sample.alternateIndex ?? 0,
     dynamic: sample.dynamic,
+  };
+}
+
+function validateLogoManifest(manifest) {
+  if (!Array.isArray(manifest.samples)) throw new Error("Logo guitar manifest has no samples");
+  const sampleIndex = createPhysicalSampleIndex(manifest.samples);
+  LOGO_G_MINOR_VOICING.forEach((midi, stringIndex) => {
+    const fret = midi - GUITAR_STRINGS[stringIndex];
+    const candidates = sampleIndex.get(`${stringIndex}:${fret}`) ?? [];
+    if (!candidates.length) {
+      throw new Error(`Logo guitar manifest is incomplete at string ${stringIndex}, fret ${fret}`);
+    }
+  });
+  return {
+    ...manifest,
+    sampleIndex,
+    mode: "recorded G minor logo signature",
   };
 }
 
@@ -227,6 +247,22 @@ async function loadManifest() {
       });
   }
   return manifestPromise;
+}
+
+async function loadLogoManifest() {
+  if (!logoManifestPromise) {
+    logoManifestPromise = fetch(LOGO_SAMPLE_MANIFEST_URL)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Logo guitar manifest returned ${response.status}`);
+        return response.json();
+      })
+      .then(validateLogoManifest)
+      .catch((error) => {
+        logoManifestPromise = null;
+        throw error;
+      });
+  }
+  return logoManifestPromise;
 }
 
 function createAudioGraph(context) {
@@ -609,6 +645,11 @@ export default function useGuitarEngine() {
     cancelPlayback();
   }, [cancelPlayback]);
 
+  const activateLogoAudio = useCallback(async () => {
+    const context = await ensureContext();
+    return context?.state === "running";
+  }, [ensureContext]);
+
   const prepareLogoSignature = useCallback(async () => {
     if (logoPreparationRef.current) return logoPreparationRef.current;
     const context = getContext();
@@ -616,7 +657,7 @@ export default function useGuitarEngine() {
 
     logoPreparationRef.current = (async () => {
       try {
-        const manifest = await loadManifest();
+        const manifest = await loadLogoManifest();
         await prepareVoicings(
           context,
           [LOGO_G_MINOR_VOICING],
@@ -649,7 +690,7 @@ export default function useGuitarEngine() {
     if (context.state !== "running") return null;
 
     try {
-      const manifest = await loadManifest();
+      const manifest = await loadLogoManifest();
       const prepared = await prepareVoicings(
         context,
         [LOGO_G_MINOR_VOICING],
@@ -754,6 +795,7 @@ export default function useGuitarEngine() {
   }, []);
 
   return {
+    activateLogoAudio,
     audioReady,
     playLogoSignature,
     playSequence,

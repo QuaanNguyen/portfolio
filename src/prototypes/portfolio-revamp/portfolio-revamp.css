@@ -3,6 +3,14 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Hedvig Letters Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/hedvig-letters-sans-latin.woff2") format("woff2");
+}
+
 .portfolio-prototype {
   position: fixed;
   inset: 0;
