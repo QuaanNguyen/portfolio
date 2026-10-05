@@ -43,6 +43,7 @@
 }
 
 .portfolio-home {
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -158,6 +159,8 @@
   position: relative;
   top: auto;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100dvh;
   min-height: 0;
   padding: clamp(174px, 21vh, 216px) clamp(26px, 2.6vw, 48px) clamp(24px, 3vh, 36px);
@@ -182,6 +185,16 @@
   min-height: 0;
 }
 
+.whoami-section h1,
+.section-heading h2,
+.playground-section h2 {
+  margin: 0;
+  color: var(--portfolio-ink);
+  font-weight: 520;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
+}
+
 .whoami-section h1 {
   margin-top: 0;
   font-size: clamp(45px, 4.15vw, 70px);
@@ -194,15 +207,39 @@
 }
 
 .identity-list {
+  position: relative;
+  z-index: 2;
   border-bottom: 0;
 }
 
 .portfolio-home .identity-item {
+  width: 100%;
   padding: clamp(9px, 1.35vh, 14px) 0;
+  border-top: 1px solid var(--portfolio-soft-line);
+  cursor: none;
 }
 
 .portfolio-home .identity-word {
+  display: block;
+  color: var(--portfolio-ink);
   font-size: clamp(24px, 2.25vw, 38px);
+  font-weight: 520;
+  letter-spacing: -0.045em;
+  text-align: left;
+  transition: color 180ms ease, opacity 180ms ease;
+}
+
+.identity-mobile-image {
+  display: none;
+}
+
+.identity-list:has(.identity-item:hover) .identity-item:not(:hover) .identity-word {
+  opacity: 0.35;
+}
+
+.portfolio-home .identity-item:hover .identity-word,
+.portfolio-home .identity-item.is-active .identity-word {
+  color: var(--portfolio-blue);
 }
 
 .identity-preview {
@@ -222,7 +259,14 @@
 }
 
 .identity-preview img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   image-rendering: auto;
+  will-change: transform;
 }
 
 .identity-preview > span {
@@ -265,6 +309,16 @@
   font-size: clamp(14px, 1.05vw, 17px);
   font-weight: 580;
   line-height: 1.25;
+}
+
+.identity-footer a {
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.identity-footer a:hover {
+  color: var(--portfolio-blue);
+  text-decoration: underline;
 }
 
 .identity-direct-contact {
@@ -320,9 +374,17 @@
 }
 
 .education-row > button {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
+  width: 100%;
   padding: clamp(4px, 0.6vh, 7px) 0;
+  border: 0;
+  background: transparent;
+  color: var(--portfolio-ink);
+  cursor: pointer;
+  text-align: left;
 }
 
 .education-row > button > span:first-child,
@@ -341,12 +403,15 @@
 
 .education-row strong {
   font-size: clamp(16px, 1.35vw, 22px);
+  font-weight: 580;
+  letter-spacing: -0.025em;
 }
 
 .education-row small {
   color: var(--portfolio-ink);
   font-size: clamp(14px, 1.08vw, 18px);
   font-weight: 540;
+  line-height: 1.4;
 }
 
 .expand-mark {
@@ -369,8 +434,13 @@
   color: var(--portfolio-blue);
 }
 
+.education-detail {
+  overflow: hidden;
+}
+
 .education-detail p {
   max-width: 860px;
+  margin: 0;
   padding: 0 40px 4px 0;
   font-size: clamp(12px, 0.95vw, 15px);
   line-height: 1.45;
@@ -378,8 +448,14 @@
 }
 
 .education-detail a {
+  display: inline-block;
   margin-bottom: 3px;
+  color: var(--portfolio-blue);
   font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .experience-grid {
@@ -393,15 +469,21 @@
 
 .experience-card {
   position: relative;
+  display: flex;
   min-width: 0;
   min-height: clamp(50px, 6vh, 64px);
   width: 100%;
   padding: clamp(7px, 0.85vh, 9px) clamp(30px, 2.3vw, 40px) clamp(7px, 0.85vh, 9px) clamp(8px, 0.85vw, 13px);
   align-self: start;
   justify-content: flex-start;
-  border-color: var(--portfolio-soft-line);
+  flex-direction: column;
+  border: 1px solid var(--portfolio-soft-line);
   border-radius: 2px;
   background: transparent;
+  color: var(--portfolio-ink);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
 }
 
 .experience-card:hover {
@@ -435,6 +517,7 @@
 }
 
 .experience-title-line img {
+  display: block;
   width: clamp(85.8px, 7.48vw, 123.2px);
   height: clamp(26.4px, 2.31vw, 37.4px);
   padding: 0;
@@ -445,8 +528,12 @@
 }
 
 .experience-title-line strong {
+  min-width: 0;
   color: #454545;
   font-size: clamp(14.3px, 1.265vw, 19.8px);
+  font-weight: 620;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
 }
 
 .experience-detail {
@@ -478,14 +565,19 @@
 .project-list a {
   display: grid;
   grid-template-columns: minmax(120px, 0.72fr) minmax(170px, 1fr) auto;
+  align-items: center;
   gap: 16px;
   min-height: 0;
   padding: 4px 0;
   border: 0;
+  color: var(--portfolio-ink);
+  text-decoration: none;
 }
 
 .project-list strong {
   font-size: clamp(17px, 1.55vw, 25px);
+  font-weight: 560;
+  letter-spacing: -0.035em;
 }
 
 .project-list small {
@@ -521,14 +613,25 @@
 .playground-section > button {
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   grid-column: 3;
   justify-self: end;
   min-width: 174px;
   padding: 13px 16px;
+  border: 1px solid var(--portfolio-blue);
+  border-radius: 2px;
   background: rgba(255, 255, 255, 0.92);
   color: var(--portfolio-blue);
+  cursor: pointer;
   font-size: 13.2px;
+  font-weight: 760;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
   backdrop-filter: blur(8px);
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .playground-emoji-world {
@@ -823,7 +926,13 @@
 
   .project-list small {
     grid-column: 1 / -1;
+    grid-row: 2;
     display: block;
+  }
+
+  .project-list a > span:last-child {
+    grid-column: 2;
+    grid-row: 1;
   }
 
   .playground-section > button {
