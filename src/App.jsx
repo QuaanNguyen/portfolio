@@ -1,23 +1,23 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import PortfolioHomePage from "./prototypes/portfolio-revamp/PortfolioHomePage";
+import PortfolioPage from "./portfolio/PortfolioPage";
 
-const PortfolioRevampPrototype = import.meta.env.DEV
-  ? lazy(() => import("./prototypes/portfolio-revamp/PortfolioRevampPrototype"))
+const ChordStudioPrototype = import.meta.env.DEV
+  ? lazy(() => import("./prototypes/chord-studio/ChordStudioPrototype"))
   : null;
 
 function App() {
   return (
     <Suspense fallback={null}>
       <Routes>
-        <Route path="/" element={<PortfolioHomePage />} />
-        {PortfolioRevampPrototype && (
+        <Route path="/" element={<PortfolioPage />} />
+        {ChordStudioPrototype && (
           <Route
-            path="/prototype/portfolio-revamp"
-            element={<PortfolioRevampPrototype />}
+            path="/prototype/chord-studio"
+            element={<ChordStudioPrototype />}
           />
         )}
-        <Route path="*" element={<PortfolioHomePage />} />
+        <Route path="*" element={<PortfolioPage />} />
       </Routes>
     </Suspense>
   );

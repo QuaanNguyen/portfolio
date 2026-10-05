@@ -1,11 +1,54 @@
-.portfolio-prototype {
+@font-face {
+  font-family: "Hedvig Letters Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/hedvig-letters-sans-latin.woff2") format("woff2");
+}
+
+.portfolio-page,
+.portfolio-page * {
+  box-sizing: border-box;
+}
+
+.portfolio-page {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
   background: #ffffff;
+  color: #17201c;
+  font-family: "Hedvig Letters Sans", "Avenir Next", "Segoe UI", sans-serif;
+  font-synthesis: none;
+}
+
+.portfolio-page button,
+.portfolio-page input {
+  font: inherit;
+}
+
+.portfolio-page button,
+.portfolio-page a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.portfolio-page button:focus-visible,
+.portfolio-page a:focus-visible,
+.portfolio-page input:focus-visible,
+.portfolio-page summary:focus-visible {
+  outline: 2px solid #176bff;
+  outline-offset: 3px;
 }
 
 .portfolio-home {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background: #ffffff;
   color: #454545;
+  --portfolio-blue: #4f6ff6;
   --portfolio-ink: #454545;
   --portfolio-muted: #454545;
   --portfolio-line: #e8e8e8;
@@ -558,6 +601,7 @@
     display: none;
   }
 
+  .portfolio-page:has(.portfolio-home.is-revealed),
   .portfolio-prototype:has(.portfolio-home.is-revealed),
   .prototype-page:has(.portfolio-home.is-revealed),
   .portfolio-home.is-revealed {

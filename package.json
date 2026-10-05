@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prototype": "vite --open /prototype/portfolio-revamp?variant=A&page=home",
-    "test:prototype": "node --test src/prototypes/portfolio-revamp/identityPreviewMotion.test.js src/prototypes/portfolio-revamp/musicModel.test.js src/prototypes/portfolio-revamp/playgroundEmojiCatalog.test.js src/prototypes/portfolio-revamp/playgroundPhysics.test.js src/prototypes/portfolio-revamp/useGuitarEngine.test.js src/prototypes/portfolio-revamp/visualAssets.test.js",
+    "prototype": "vite --open /prototype/chord-studio",
+    "test": "node --test 'src/**/*.test.js'",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

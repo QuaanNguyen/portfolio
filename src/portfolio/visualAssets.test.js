@@ -4,11 +4,10 @@ import test from "node:test";
 
 const playgroundPath = new URL("./PlaygroundUnderConstruction.jsx", import.meta.url);
 const logoPath = new URL("./PrototypeLogo.jsx", import.meta.url);
-const homeStylesPath = new URL("./portfolio-home.css", import.meta.url);
-const prototypeStylesPath = new URL("./portfolio-revamp.css", import.meta.url);
+const portfolioStylesPath = new URL("./portfolio.css", import.meta.url);
 const portfolioFontPath = new URL("./assets/fonts/hedvig-letters-sans-latin.woff2", import.meta.url);
-const indexPath = new URL("../../../index.html", import.meta.url);
-const faviconPath = new URL("../../../logo/favicon.svg", import.meta.url);
+const indexPath = new URL("../../index.html", import.meta.url);
+const faviconPath = new URL("../../logo/favicon.svg", import.meta.url);
 
 test("the playground uses emoji bodies without the inflating canvas", async () => {
   const source = await readFile(playgroundPath, "utf8");
@@ -40,7 +39,7 @@ test("the animated logo does not render six staging dots", async () => {
 });
 
 test("the portfolio typeface is bundled with the release", async () => {
-  const styles = await readFile(prototypeStylesPath, "utf8");
+  const styles = await readFile(portfolioStylesPath, "utf8");
   assert.match(styles, /@font-face/);
   assert.match(styles, /hedvig-letters-sans-latin\.woff2/);
   assert.doesNotMatch(styles, /fonts\.googleapis\.com/);
@@ -48,7 +47,7 @@ test("the portfolio typeface is bundled with the release", async () => {
 });
 
 test("the playground button keeps its original grid position", async () => {
-  const source = await readFile(homeStylesPath, "utf8");
+  const source = await readFile(portfolioStylesPath, "utf8");
   const desktopRule = source.match(/\.playground-section > button\s*\{([^}]*)\}/)?.[1] ?? "";
   const responsiveStyles = source.slice(source.indexOf("@media (max-width: 1024px)"));
   assert.match(desktopRule, /grid-column:\s*3;/);

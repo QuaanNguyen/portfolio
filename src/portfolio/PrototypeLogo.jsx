@@ -6,15 +6,15 @@ import {
   useReducedMotion,
   useTransform,
 } from "motion/react";
-import qAsset from "../../../logo/q.svg";
-import uAsset from "../../../logo/u.svg";
-import aAsset from "../../../logo/a.svg";
-import nAsset from "../../../logo/n.svg";
-import lnNAsset from "../../../logo/last_name/n.svg";
-import lnGAsset from "../../../logo/last_name/g.svg";
-import lnUAsset from "../../../logo/last_name/u.svg";
-import lnYAsset from "../../../logo/last_name/y.svg";
-import lnEAsset from "../../../logo/last_name/e.svg";
+import qAsset from "../../logo/q.svg";
+import uAsset from "../../logo/u.svg";
+import aAsset from "../../logo/a.svg";
+import nAsset from "../../logo/n.svg";
+import lnNAsset from "../../logo/last_name/n.svg";
+import lnGAsset from "../../logo/last_name/g.svg";
+import lnUAsset from "../../logo/last_name/u.svg";
+import lnYAsset from "../../logo/last_name/y.svg";
+import lnEAsset from "../../logo/last_name/e.svg";
 import {
   LOGO_HOLD_SECONDS,
   LOGO_STRING_INTERVAL_SECONDS,

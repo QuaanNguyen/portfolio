@@ -3,16 +3,9 @@ import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 import { createChord } from "./musicModel.js";
 import {
-  LOGO_HOLD_SECONDS,
-  LOGO_RESOLVE_SECONDS,
-  LOGO_STRING_DELAYS,
-  LOGO_STRING_INTERVAL_SECONDS,
-} from "./logoTiming.js";
-import {
   createPhysicalSampleIndex,
   eventStrums,
   GUITAR_STRINGS,
-  LOGO_G_MINOR_VOICING,
   resolvePhysicalRecording,
   selectPlayableVoicing,
   STRUM_STRING_INTERVAL_SECONDS,
@@ -20,41 +13,9 @@ import {
   tuningCorrectedPlaybackRate,
 } from "./useGuitarEngine.js";
 
-test("logo signature uses the requested G minor shape", () => {
-  assert.deepEqual(
-    LOGO_G_MINOR_VOICING.map((midi, index) => midi - GUITAR_STRINGS[index]),
-    [3, 5, 5, 3, 3, 3],
-  );
-  assert.deepEqual(
-    [...new Set(LOGO_G_MINOR_VOICING.map((midi) => midi % 12))].sort((left, right) => left - right),
-    [2, 7, 10],
-  );
-});
-
-test("release logo audio contains only the six required guitar notes", async () => {
-  const manifestUrl = new URL("../../../public/audio/logo-guitar/manifest.json", import.meta.url);
-  const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
-
-  assert.equal(manifest.baseUrl, "/audio/logo-guitar");
-  assert.equal(manifest.samples.length, GUITAR_STRINGS.length);
-  assert.match(manifest.source, /physical-string recordings/);
-  assert.match(manifest.permissionUrl, /^https:\/\//);
-
-  for (let stringIndex = 0; stringIndex < GUITAR_STRINGS.length; stringIndex += 1) {
-    const sample = manifest.samples.find((candidate) => candidate.stringIndex === stringIndex);
-    assert.ok(sample);
-    assert.equal(sample.midi, LOGO_G_MINOR_VOICING[stringIndex]);
-    assert.equal(sample.fret, LOGO_G_MINOR_VOICING[stringIndex] - GUITAR_STRINGS[stringIndex]);
-    await access(new URL(`../../../public/audio/logo-guitar/${sample.file}`, import.meta.url));
-  }
-});
-
 test("every acoustic strum uses a fixed natural string interval", () => {
   assert.equal(STRUM_STRING_INTERVAL_SECONDS, 0.021);
   assert.ok(Math.abs(STRUM_STRING_INTERVAL_SECONDS * 5 - 0.105) < 1e-9);
-  assert.equal(LOGO_STRING_INTERVAL_SECONDS, 0.09);
-  assert.equal(LOGO_STRING_DELAYS.length, 6);
-  assert.ok(Math.abs(LOGO_RESOLVE_SECONDS - 1.51) < 1e-9);
 });
 
 test("generated chord voicings stay on playable strings and within a four-fret span", () => {

@@ -1,23 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  LOGO_RESOLVE_PAUSE_SECONDS,
-  LOGO_STRING_INTERVAL_SECONDS,
-  LOGO_STRING_START_SECONDS,
-} from "./logoTiming.js";
 
 export const GUITAR_STRINGS = [40, 45, 50, 55, 59, 64];
 export const STRUM_STRING_INTERVAL_SECONDS = 0.021;
-export const LOGO_G_MINOR_VOICING = [43, 50, 55, 58, 62, 67];
 
 const MAX_FRET = 12;
 const MAX_FRET_SPAN = 4;
 const MAX_SAMPLE_CACHE_SIZE = 72;
 const SHAPE_CACHE = new Map();
 const SAMPLE_MANIFEST_URL = "/audio/guitar-physical/manifest.json";
-const LOGO_SAMPLE_MANIFEST_URL = "/audio/logo-guitar/manifest.json";
 
 let manifestPromise;
-let logoManifestPromise;
 
 const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 const mod = (value, divisor) => ((value % divisor) + divisor) % divisor;
@@ -198,23 +190,6 @@ export function resolvePhysicalRecording(manifest, stringIndex, midi, occurrence
   };
 }
 
-function validateLogoManifest(manifest) {
-  if (!Array.isArray(manifest.samples)) throw new Error("Logo guitar manifest has no samples");
-  const sampleIndex = createPhysicalSampleIndex(manifest.samples);
-  LOGO_G_MINOR_VOICING.forEach((midi, stringIndex) => {
-    const fret = midi - GUITAR_STRINGS[stringIndex];
-    const candidates = sampleIndex.get(`${stringIndex}:${fret}`) ?? [];
-    if (!candidates.length) {
-      throw new Error(`Logo guitar manifest is incomplete at string ${stringIndex}, fret ${fret}`);
-    }
-  });
-  return {
-    ...manifest,
-    sampleIndex,
-    mode: "recorded G minor logo signature",
-  };
-}
-
 function validateManifest(manifest) {
   if (!Array.isArray(manifest.samples)) throw new Error("Guitar sample manifest has no samples");
   const sampleIndex = createPhysicalSampleIndex(manifest.samples);
@@ -247,22 +222,6 @@ async function loadManifest() {
       });
   }
   return manifestPromise;
-}
-
-async function loadLogoManifest() {
-  if (!logoManifestPromise) {
-    logoManifestPromise = fetch(LOGO_SAMPLE_MANIFEST_URL)
-      .then((response) => {
-        if (!response.ok) throw new Error(`Logo guitar manifest returned ${response.status}`);
-        return response.json();
-      })
-      .then(validateLogoManifest)
-      .catch((error) => {
-        logoManifestPromise = null;
-        throw error;
-      });
-  }
-  return logoManifestPromise;
 }
 
 function createAudioGraph(context) {
@@ -480,7 +439,6 @@ export default function useGuitarEngine() {
   const playbackRef = useRef(null);
   const liveVoicesRef = useRef(Array(6).fill(null));
   const liveOccurrenceRef = useRef(0);
-  const logoPreparationRef = useRef(null);
   const [audioReady, setAudioReady] = useState(false);
   const [sampleMode, setSampleMode] = useState("recorded guitar sleeps");
 
@@ -645,115 +603,6 @@ export default function useGuitarEngine() {
     cancelPlayback();
   }, [cancelPlayback]);
 
-  const activateLogoAudio = useCallback(async () => {
-    const context = await ensureContext();
-    return context?.state === "running";
-  }, [ensureContext]);
-
-  const prepareLogoSignature = useCallback(async () => {
-    if (logoPreparationRef.current) return logoPreparationRef.current;
-    const context = getContext();
-    if (!context) return false;
-
-    logoPreparationRef.current = (async () => {
-      try {
-        const manifest = await loadLogoManifest();
-        await prepareVoicings(
-          context,
-          [LOGO_G_MINOR_VOICING],
-          [0],
-          manifest,
-          sampleCacheRef.current,
-        );
-        setSampleMode(manifest.mode);
-        setAudioReady(true);
-        return true;
-      } catch {
-        setSampleMode("recorded guitar unavailable");
-        setAudioReady(false);
-        return false;
-      }
-    })();
-    return logoPreparationRef.current;
-  }, [getContext]);
-
-  const playLogoSignature = useCallback(async (options = {}) => {
-    const callbacks = typeof options === "function" ? { onBeat: options } : options;
-    cancelPlayback();
-    const token = playbackTokenRef.current;
-    const context = await ensureContext();
-    if (!context || !graphRef.current || playbackTokenRef.current !== token) return null;
-
-    // Do NOT schedule nodes into a suspended AudioContext.
-    // If the browser hasn't granted audio playback yet, scheduling nodes queues
-    // them up and causes phantom bursts when switching tabs or focusing.
-    if (context.state !== "running") return null;
-
-    try {
-      const manifest = await loadLogoManifest();
-      const prepared = await prepareVoicings(
-        context,
-        [LOGO_G_MINOR_VOICING],
-        [0],
-        manifest,
-        sampleCacheRef.current,
-      );
-      if (playbackTokenRef.current !== token || context.state !== "running") return null;
-
-      setSampleMode(manifest.mode);
-      setAudioReady(true);
-      const startTime = context.currentTime + LOGO_STRING_START_SECONDS;
-      const recordings = prepared.recordings[0];
-      const voices = [];
-      const timers = [];
-
-      LOGO_G_MINOR_VOICING.forEach((midi, stringIndex) => {
-        const when = startTime + stringIndex * LOGO_STRING_INTERVAL_SECONDS;
-        const recording = recordings[stringIndex];
-        const buffer = prepared.buffers.get(recording.url);
-        if (!buffer || !recording) return;
-
-        const voice = scheduleRecordedNote(
-          context,
-          graphRef.current.input,
-          buffer,
-          recording,
-          stringIndex,
-          when,
-          0.48 + stringIndex * 0.035,
-        );
-        voices.push(voice);
-        timers.push(window.setTimeout(() => {
-          if (playbackTokenRef.current === token) callbacks.onBeat?.(stringIndex);
-        }, Math.max(0, (when - context.currentTime) * 1000)));
-      });
-
-      const resolveTime = startTime
-        + (LOGO_G_MINOR_VOICING.length - 1) * LOGO_STRING_INTERVAL_SECONDS
-        + LOGO_RESOLVE_PAUSE_SECONDS;
-      timers.push(window.setTimeout(() => {
-        if (playbackTokenRef.current === token) callbacks.onResolve?.();
-      }, Math.max(0, (resolveTime - context.currentTime) * 1000)));
-      const completionTime = voices.reduce((end, voice) => Math.max(end, voice.endTime), resolveTime);
-      timers.push(window.setTimeout(() => {
-        if (playbackTokenRef.current !== token) return;
-        previousVoicingRef.current = [...LOGO_G_MINOR_VOICING];
-        playbackRef.current = null;
-      }, Math.max(0, (completionTime + 0.06 - context.currentTime) * 1000)));
-      playbackRef.current = { token, timers, voices };
-      return {
-        durationMs: Math.round((completionTime + 0.06 - startTime) * 1000),
-        resolveAfterMs: Math.round((resolveTime - startTime) * 1000),
-      };
-    } catch {
-      if (playbackTokenRef.current === token) {
-        setSampleMode("recorded guitar unavailable");
-        setAudioReady(false);
-      }
-      return null;
-    }
-  }, [cancelPlayback, ensureContext]);
-
   // Unlock AudioContext on first user interaction anywhere on the window
   useEffect(() => {
     const unlock = () => {
@@ -795,11 +644,8 @@ export default function useGuitarEngine() {
   }, []);
 
   return {
-    activateLogoAudio,
     audioReady,
-    playLogoSignature,
     playSequence,
-    prepareLogoSignature,
     sampleMode,
     stopSequence,
     strum,
