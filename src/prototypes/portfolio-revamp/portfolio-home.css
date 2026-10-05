@@ -105,8 +105,8 @@
   display: grid;
   grid-template-columns: clamp(350px, 27vw, 480px) minmax(0, 1fr);
   width: 100%;
-  height: calc(100dvh + 2px);
-  min-height: calc(100dvh + 2px);
+  height: 100dvh;
+  min-height: 100dvh;
   padding: 0;
   background: #ffffff;
 }
@@ -563,8 +563,8 @@
   .portfolio-home.is-revealed {
     position: relative;
     inset: auto;
-    height: calc(100dvh + 2px);
-    min-height: calc(100dvh + 2px);
+    height: 100dvh;
+    min-height: 100dvh;
     overflow: visible;
   }
 }
