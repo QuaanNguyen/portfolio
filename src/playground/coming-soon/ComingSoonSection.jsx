@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion as Motion } from "motion/react";
-import { selectSadEmoji } from "./playgroundEmojiCatalog";
+import { selectSadEmoji } from "./sadEmojiCatalog";
 import {
   addEmojiBody,
   createPlaygroundPhysics,
@@ -10,11 +10,11 @@ import {
   hasMovingEmojiBodies,
   resizePlaygroundPhysics,
   stepPlaygroundPhysics,
-} from "./playgroundPhysics";
+} from "./emojiPhysics";
 
 const LABEL = "// coming soon";
 
-export default function PlaygroundUnderConstruction() {
+export default function ComingSoonSection() {
   const [isRevealed, setIsRevealed] = useState(false);
   const [emojis, setEmojis] = useState([]);
   const [announcement, setAnnouncement] = useState("");
@@ -142,6 +142,7 @@ export default function PlaygroundUnderConstruction() {
       </AnimatePresence>
       <button
         type="button"
+        className="playground-enter"
         onClick={handleClick}
         aria-label={isRevealed ? "Drop a sad emoji into the playground" : "Reveal playground status"}
       >

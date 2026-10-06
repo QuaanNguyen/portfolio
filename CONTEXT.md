@@ -14,7 +14,13 @@ The animated blue monogram mark and its accompanying six-note acoustic guitar ch
 The interactive hover showcase cycling through Quan's identity roles (engineer, overlander, chomper, foodie) with coordinated visual preview motion and responsive positioning.
 
 ### Playground
-The physics-enabled interactive zone under construction featuring gravity, emoji collision bodies, and boundary containment.
+The creative-project catalog reached from the portfolio's "enter site" button, living in `src/playground/`. Gated by the `VITE_PLAYGROUND_MAINTENANCE` flag (on unless set to `off`).
+
+### ComingSoon
+The Playground's maintenance face: the "// coming soon" label with sad emoji collision bodies dropping under gravity. Shown in the portfolio section while maintenance is on; `/playground` redirects home.
+
+### Sandbox
+The Playground's live face at `/playground`: a sand heightfield the visitor plows with project cards or a finger, with `ctrl+z` undo and 3D objects rising out of hovered cards.
 
 ### ChordStudio
 An exploratory sound design environment for interactive multi-fret chord voicing and harmonic analysis, isolated from the production portfolio runtime.

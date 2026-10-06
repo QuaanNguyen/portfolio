@@ -115,13 +115,13 @@ const DEFAULT_CHARACTER_ANIMATIONS = {
   },
 };
 
-const SURNAME_ORIGINS = [
-  { x: 47.999, y: 190.795 },
-  { x: 69.077, y: 190.295 },
-  { x: 47.999, y: 200.173 },
-  { x: 70.064, y: 199.715 },
-  { x: 47.999, y: 209.177 },
-  { x: 70.556, y: 211.471 },
+const DOTS = [
+  { x: 47.999, y: 190.795, size: 5.7 },
+  { x: 69.077, y: 190.295, size: 6.3 },
+  { x: 47.999, y: 200.173, size: 5.96 },
+  { x: 70.064, y: 199.715, size: 6.12 },
+  { x: 47.999, y: 209.177, size: 6.36 },
+  { x: 70.556, y: 211.471, size: 6.14 },
 ];
 
 const SURNAME_ASSETS = [
@@ -222,15 +222,15 @@ function LogoAsset({ id, asset, color, progress, animation = {} }) {
   );
 }
 
-function SurnameGlyph({ origin, surnameAsset, index, color, progress }) {
+function SurnameGlyph({ dot, surnameAsset, index, color, progress }) {
   const start =
     (LOGO_STRING_START_SECONDS + index * LOGO_STRING_INTERVAL_SECONDS) /
     LOGO_HOLD_SECONDS;
   const duration = 0.32;
   const end = Math.min(1, start + duration);
 
-  const dx = surnameAsset.finalX - origin.x;
-  const dy = surnameAsset.finalY - origin.y;
+  const dx = surnameAsset.finalX - dot.x;
+  const dy = surnameAsset.finalY - dot.y;
 
   // Gentle initial takeoff: at 30% of time, dot has moved only 14% of the distance (~20% slower departure)
   const tStart = start;
@@ -249,6 +249,17 @@ function SurnameGlyph({ origin, surnameAsset, index, color, progress }) {
     [0, 0, dy * 0.14, dy * 0.75, dy, dy],
   );
 
+  const dotOpacity = useTransform(
+    progress,
+    [0, tStart, tMid1, tEnd],
+    [1, 1, 0.7, 0],
+  );
+  const dotScale = useTransform(
+    progress,
+    [0, tStart, tEnd],
+    [1, 1, 1.7],
+  );
+
   const glyphOpacity = useTransform(
     progress,
     [0, tStart + duration * 0.18, tEnd],
@@ -265,8 +276,8 @@ function SurnameGlyph({ origin, surnameAsset, index, color, progress }) {
       aria-hidden="true"
       style={{
         position: "absolute",
-        left: origin.x,
-        top: origin.y,
+        left: dot.x,
+        top: dot.y,
         width: surnameAsset.width,
         height: surnameAsset.height,
         x,
@@ -274,6 +285,20 @@ function SurnameGlyph({ origin, surnameAsset, index, color, progress }) {
         pointerEvents: "none",
       }}
     >
+      <Motion.i
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: dot.size,
+          height: dot.size,
+          translate: "-50% -50%",
+          borderRadius: "50%",
+          background: color,
+          opacity: dotOpacity,
+          scale: dotScale,
+        }}
+      />
       <Motion.span
         style={{
           position: "absolute",
@@ -388,10 +413,10 @@ export default function PrototypeLogo({
             animation={characterAnimations[asset.id]}
           />
         ))}
-        {SURNAME_ORIGINS.map((origin, index) => (
+        {DOTS.map((dot, index) => (
           <SurnameGlyph
-            key={`${origin.x}-${origin.y}`}
-            origin={origin}
+            key={`${dot.x}-${dot.y}`}
+            dot={dot}
             surnameAsset={SURNAME_ASSETS[index]}
             index={index}
             color={color}

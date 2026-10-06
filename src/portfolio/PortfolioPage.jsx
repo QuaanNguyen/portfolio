@@ -16,7 +16,7 @@ import crownCastleLogo from "./assets/organizations/crown-castle.svg";
 import johnHancockLogo from "./assets/organizations/john-hancock.svg";
 import mcaoLogo from "./assets/organizations/mcao.webp";
 
-const PlaygroundUnderConstruction = lazy(() => import("./PlaygroundUnderConstruction"));
+const PlaygroundSection = lazy(() => import("../playground/PlaygroundSection"));
 
 const IDENTITIES = [
   { label: "engineer", image: engineerImage, alt: "A laptop open in the ASU Next Lab" },
@@ -256,7 +256,7 @@ export default function PortfolioPage() {
                   </div>
 
                   <Suspense fallback={<div className="playground-section" aria-hidden="true" />}>
-                    <PlaygroundUnderConstruction />
+                    <PlaygroundSection />
                   </Suspense>
                 </div>
               </Motion.div>

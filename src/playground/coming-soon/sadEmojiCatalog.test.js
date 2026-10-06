@@ -3,7 +3,7 @@ import test from "node:test";
 import {
   SAD_EMOJI_CATALOG,
   selectSadEmoji,
-} from "./playgroundEmojiCatalog.js";
+} from "./sadEmojiCatalog.js";
 
 test("the sad emoji catalog exposes reusable labeled objects", () => {
   const emojis = Object.values(SAD_EMOJI_CATALOG);

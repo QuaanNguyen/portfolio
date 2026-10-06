@@ -610,7 +610,7 @@
   margin: 0;
 }
 
-.playground-section > button {
+.playground-section > .playground-enter {
   position: relative;
   z-index: 2;
   display: flex;
@@ -629,6 +629,7 @@
   font-weight: 760;
   letter-spacing: 0.04em;
   text-align: left;
+  text-decoration: none;
   text-transform: uppercase;
   backdrop-filter: blur(8px);
   transition: background 180ms ease, color 180ms ease;
@@ -681,9 +682,9 @@
   border: 0;
 }
 
-.playground-section > button:hover,
-.playground-section > button:focus-visible,
-.playground-section > button:active {
+.playground-section > .playground-enter:hover,
+.playground-section > .playground-enter:focus-visible,
+.playground-section > .playground-enter:active {
   background: var(--portfolio-blue);
   color: #ffffff;
 }
@@ -886,7 +887,7 @@
     overflow: hidden;
   }
 
-  .playground-section > button {
+  .playground-section > .playground-enter {
     grid-column: 1;
     grid-row: 3;
   }
@@ -935,7 +936,7 @@
     grid-row: 1;
   }
 
-  .playground-section > button {
+  .playground-section > .playground-enter {
     width: 100%;
   }
 }

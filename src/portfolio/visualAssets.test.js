@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-const playgroundPath = new URL("./PlaygroundUnderConstruction.jsx", import.meta.url);
+const playgroundPath = new URL("../playground/coming-soon/ComingSoonSection.jsx", import.meta.url);
 const logoPath = new URL("./PrototypeLogo.jsx", import.meta.url);
 const portfolioStylesPath = new URL("./portfolio.css", import.meta.url);
 const portfolioFontPath = new URL("./assets/fonts/hedvig-letters-sans-latin.woff2", import.meta.url);
@@ -16,7 +16,7 @@ test("the playground uses emoji bodies without the inflating canvas", async () =
   assert.doesNotMatch(source, /canvas|Inflating|WebGL/);
 });
 
-test("the favicon uses the blue logo mark without dot decoration", async () => {
+test("the favicon uses the blue logo mark with its six surname dots", async () => {
   const [page, favicon] = await Promise.all([
     readFile(indexPath, "utf8"),
     readFile(faviconPath, "utf8"),
@@ -27,15 +27,16 @@ test("the favicon uses the blue logo mark without dot decoration", async () => {
     .map(Number);
   assert.match(page, /href="\/logo\/favicon\.svg"/);
   assert.match(favicon, /#3976d9/i);
-  assert.equal(paths.length, 6);
+  assert.equal(paths.length, 12);
   assert.ok(viewBox[2] < 121);
   assert.ok(viewBox[3] < 223);
-  assert.doesNotMatch(favicon, /<circle|dots/i);
 });
 
-test("the animated logo does not render six staging dots", async () => {
+test("the animated logo stages six dots that become the surname", async () => {
   const source = await readFile(logoPath, "utf8");
-  assert.doesNotMatch(source, /const DOTS|<Motion\.i|borderRadius:\s*"50%"/);
+  const dots = source.match(/const DOTS = \[([^\]]*)\]/)?.[1] ?? "";
+  assert.equal(dots.match(/size:/g)?.length, 6);
+  assert.match(source, /<Motion\.i/);
 });
 
 test("the portfolio typeface is bundled with the release", async () => {
@@ -48,8 +49,8 @@ test("the portfolio typeface is bundled with the release", async () => {
 
 test("the playground button keeps its original grid position", async () => {
   const source = await readFile(portfolioStylesPath, "utf8");
-  const desktopRule = source.match(/\.playground-section > button\s*\{([^}]*)\}/)?.[1] ?? "";
+  const desktopRule = source.match(/\.playground-section > \.playground-enter\s*\{([^}]*)\}/)?.[1] ?? "";
   const responsiveStyles = source.slice(source.indexOf("@media (max-width: 1024px)"));
   assert.match(desktopRule, /grid-column:\s*3;/);
-  assert.match(responsiveStyles, /\.playground-section > button\s*\{[^}]*grid-column:\s*1;[^}]*grid-row:\s*3;/);
+  assert.match(responsiveStyles, /\.playground-section > \.playground-enter\s*\{[^}]*grid-column:\s*1;[^}]*grid-row:\s*3;/);
 });

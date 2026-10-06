@@ -8,7 +8,7 @@ import {
   getPlaygroundEmojiDiameter,
   resizePlaygroundPhysics,
   stepPlaygroundPhysics,
-} from "./playgroundPhysics.js";
+} from "./emojiPhysics.js";
 
 test("emoji sizing stays legible without overwhelming the playground", () => {
   assert.equal(getPlaygroundEmojiDiameter(320, 60), 42);

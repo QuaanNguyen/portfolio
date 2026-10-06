@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prototype": "vite --open /prototype/chord-studio",
+    "playground": "VITE_PLAYGROUND_MAINTENANCE=off vite --open /playground",
     "test": "node --test 'src/**/*.test.js'",
     "test:e2e": "node --test tests/portfolio-layout.e2e.test.js",
     "build": "vite build",
@@ -14,6 +15,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
     "@supabase/supabase-js": "^2.50.0",
     "@tailwindcss/vite": "^4.1.8",
     "gsap": "^3.15.0",
@@ -22,7 +25,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.11.0",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.1.8",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
